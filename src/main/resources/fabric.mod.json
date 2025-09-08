@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "tomsaddons",
+  "version": "${version}",
+  "name": "Toms addons",
+  "description": "Very cool minecraft mod",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/tomsaddons/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "io.github.tomtom2211.tomsaddons.client.TomsaddonsClient"
+    ],
+    "main": [
+      "io.github.tomtom2211.tomsaddons.Tomsaddons"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
