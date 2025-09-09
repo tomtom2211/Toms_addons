@@ -14,10 +14,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "io.github.tomtom2211.tomsaddons.client.TomsaddonsClient"
+      "io.github.tomtom2211.tomsaddons.client.TomsAddonsClient"
     ],
     "main": [
-      "io.github.tomtom2211.tomsaddons.Tomsaddons"
+      "io.github.tomtom2211.tomsaddons.TomsAddons"
     ]
   },
   "depends": {

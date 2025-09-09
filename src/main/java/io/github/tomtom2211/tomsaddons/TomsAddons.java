@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class Tomsaddons implements ModInitializer {
+public class TomsAddons implements ModInitializer {
 
     @Override
     public void onInitialize() {
