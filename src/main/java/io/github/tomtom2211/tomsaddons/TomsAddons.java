@@ -1,6 +1,6 @@
 package io.github.tomtom2211.tomsaddons;
 
-import io.github.tomtom2211.tomsaddons.features.jokes;
+import io.github.tomtom2211.tomsaddons.features.Jokes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -18,7 +18,7 @@ public class TomsAddons implements ModInitializer {
     @Override
     public void onInitialize() {
         Random rand = new Random();
-        jokes Jokes = new jokes();
+        Jokes Jokes = new Jokes();
         KeyBinding joke = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny healer joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
         MinecraftClient mcClient = MinecraftClient.getInstance();
         AtomicLong buttonPressTime = new AtomicLong(System.currentTimeMillis());

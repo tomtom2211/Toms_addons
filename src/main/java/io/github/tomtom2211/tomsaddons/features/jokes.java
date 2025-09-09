@@ -1,6 +1,6 @@
 package io.github.tomtom2211.tomsaddons.features;
 
-public class jokes {
+public class Jokes {
     public String[] jokes = {
             "Why did the Healer bring a pickaxe to dungeons? Because it was the only way they'd ever get carried.",
             "A Healer walks into Floor 7. The party says: 'Wait, this isn’t Bedwars—why are you here?'",
