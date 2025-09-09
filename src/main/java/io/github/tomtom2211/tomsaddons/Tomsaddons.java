@@ -8,6 +8,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
+
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -23,7 +25,7 @@ public class Tomsaddons implements ModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if(joke.wasPressed()&&client != null&&System.currentTimeMillis()- buttonPressTime.get() >=1000){
                 int randomNum = rand.nextInt(50);
-                mcClient.getNetworkHandler().sendChatMessage(Jokes.jokes[randomNum]);
+                Objects.requireNonNull(mcClient.getNetworkHandler()).sendChatMessage(Jokes.jokes[randomNum]);
                 buttonPressTime.set(System.currentTimeMillis());
             }
         });
