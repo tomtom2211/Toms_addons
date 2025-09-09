@@ -3,7 +3,7 @@
   "id": "tomsaddons",
   "version": "${version}",
   "name": "Tom's addons",
-  "description": "Simple hypixel skyblock mod.",
+  "description": "Simple Hypixel skyblock mod.",
   "authors": ["tomtom2211"],
   "contact": {  "homepage": "https://github.com/tomtom2211/Toms_addons",
                 "sources" : "https://github.com/tomtom2211/Toms_addons",
