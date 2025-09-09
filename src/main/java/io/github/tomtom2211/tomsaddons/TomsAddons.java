@@ -8,7 +8,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
-
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -17,11 +16,12 @@ public class TomsAddons implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Random rand = new Random();
-        Jokes Jokes = new Jokes();
+        Random rand = new Random(); // For random numbers
+        Jokes Jokes = new Jokes(); // For jokes array
+        MinecraftClient mcClient = MinecraftClient.getInstance(); // Minecraft client instance
+        AtomicLong buttonPressTime = new AtomicLong(System.currentTimeMillis()); // Used for delays
         KeyBinding joke = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny healer joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
-        MinecraftClient mcClient = MinecraftClient.getInstance();
-        AtomicLong buttonPressTime = new AtomicLong(System.currentTimeMillis());
+
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if(joke.wasPressed() && client!=null && System.currentTimeMillis()-buttonPressTime.get()>=1000){
                 int randomNum = rand.nextInt(50);
@@ -29,5 +29,6 @@ public class TomsAddons implements ModInitializer {
                 buttonPressTime.set(System.currentTimeMillis());
             }
         });
+
     }
 }
