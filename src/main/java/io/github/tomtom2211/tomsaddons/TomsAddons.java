@@ -23,7 +23,7 @@ public class TomsAddons implements ModInitializer {
         MinecraftClient mcClient = MinecraftClient.getInstance();
         AtomicLong buttonPressTime = new AtomicLong(System.currentTimeMillis());
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if(joke.wasPressed()&&client != null&&System.currentTimeMillis()- buttonPressTime.get() >=1000){
+            if(joke.wasPressed() && client!=null && System.currentTimeMillis()-buttonPressTime.get()>=1000){
                 int randomNum = rand.nextInt(50);
                 Objects.requireNonNull(mcClient.getNetworkHandler()).sendChatMessage(Jokes.jokes[randomNum]);
                 buttonPressTime.set(System.currentTimeMillis());
