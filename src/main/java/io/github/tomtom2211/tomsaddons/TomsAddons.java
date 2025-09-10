@@ -12,9 +12,10 @@ public class TomsAddons implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Jokes jokes = new Jokes(); // Make Jokes.java object (for initialization of joke mechanic)
+        // Jokes.java object (for the initialization of joke mechanic)
+        Jokes jokes = new Jokes();
 
-        // Make keybinds
+        // Keybinds
         KeyBinding joke = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny healer joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
 
         //  End client tick event
