@@ -1,6 +1,14 @@
 package io.github.tomtom2211.tomsaddons.features;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.KeyBinding;
+import java.util.Objects;
+import java.util.Random;
+
 public class Jokes {
+    Random rand = new Random(); // For random numbers
+    public Long buttonPressTime = System.currentTimeMillis(); // Used for delays
+    MinecraftClient mcClient = MinecraftClient.getInstance(); // Minecraft client instance
     public String[] jokes = {
             "Why did the Healer bring a pickaxe to dungeons? Because it was the only way they'd ever get carried.",
             "A Healer walks into Floor 7. The party says: 'Wait, this isn’t Bedwars—why are you here?'",
@@ -53,4 +61,11 @@ public class Jokes {
             "What’s the Healer’s dungeon carry method? Emotional support.",
             "Why do Healers love Catacombs? Because it’s the only place they feel like they belong—barely."
     };
+    public void jokeMechanic(KeyBinding joke){
+        if(joke.wasPressed() && System.currentTimeMillis()-buttonPressTime>=1000) {
+            int randomNum = rand.nextInt(50);
+            Objects.requireNonNull(mcClient.getNetworkHandler()).sendChatMessage(jokes[randomNum]);
+            buttonPressTime = System.currentTimeMillis();
+        }
+    }
 }
