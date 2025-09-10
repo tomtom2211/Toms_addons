@@ -17,6 +17,7 @@ public class TomsAddons implements ModInitializer {
         // Make keybinds
         KeyBinding joke = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny healer joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
 
+        //  End client tick event
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
                 jokes.jokeMechanic(joke);
         });
