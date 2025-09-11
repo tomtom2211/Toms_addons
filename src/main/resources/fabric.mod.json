@@ -18,6 +18,9 @@
     ],
     "main": [
       "io.github.tomtom2211.tomsaddons.TomsAddons"
+    ],
+    "modmenu": [
+      "io.github.tomtom2211.tomsaddons.modconfig.ModMenuImpl"
     ]
   },
   "depends": {
