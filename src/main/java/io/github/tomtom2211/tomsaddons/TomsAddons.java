@@ -17,16 +17,18 @@ public class TomsAddons implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        // Load saved configs
         Config.load();
-        // Jokes.java object (for the initialization of joke mechanic)
+
+        // Jokes.java object (for the initialization of jokeKey mechanic)
         Jokes jokes = new Jokes();
 
         // Keybinds
-        KeyBinding joke = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny healer joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
+        KeyBinding jokeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny healer jokeKey", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
 
         //  End client tick event
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                jokes.jokeMechanic(joke);
+                jokes.jokeLogic(jokeKey);
         });
 
         // For debugging purposes

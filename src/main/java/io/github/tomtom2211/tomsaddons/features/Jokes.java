@@ -111,7 +111,7 @@ public class Jokes {
             "Why do Healers fear Mages? Because they do the same job, but actually useful.",
             "What’s a Healer’s farewell message? 'You guys didn’t need me anyway.'"
     };
-    public void jokeMechanic(KeyBinding joke){
+    public void jokeLogic(KeyBinding joke){
         if(joke.wasPressed() && System.currentTimeMillis()-buttonPressTime>=1000) {
             int randomNum = rand.nextInt(100);
             Objects.requireNonNull(mcClient.getNetworkHandler()).sendChatMessage(jokes[randomNum]);
