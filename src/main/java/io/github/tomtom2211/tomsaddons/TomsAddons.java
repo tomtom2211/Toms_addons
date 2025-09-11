@@ -32,6 +32,6 @@ public class TomsAddons implements ModInitializer {
         });
 
         // For debugging purposes
-        LOGGER.info("Tom's Addons has been initialized!");
+        LOGGER.info("Tom's Addons have been initialized!");
     }
 }
