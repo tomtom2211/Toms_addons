@@ -28,6 +28,8 @@ public class TomsAddons implements ModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
                 jokes.jokeMechanic(joke);
         });
+
+        // For debugging purposes
         LOGGER.info("Tom's Addons has been initialized!");
     }
 }
