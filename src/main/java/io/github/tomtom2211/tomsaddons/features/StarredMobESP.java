@@ -26,9 +26,10 @@ public class StarredMobESP {
         for (Entity entity : client.world.getEntities()) {
             if (entity instanceof ArmorStandEntity armorStand && client.player.canSee(armorStand) && armorStand.getName().getString().contains("✯") && armorStand.isCustomNameVisible())
             {
-                Box box = armorStand.getBoundingBox()
-                        .expand(0.3,1,0.3)
-                        .offset(-cameraPos.x, -(cameraPos.y+1), -cameraPos.z); // Absolute => Relative coordinates
+                int mobId = armorStand.getId() - 1;
+                Entity mob = client.world.getEntityById(mobId);
+                Box box = Objects.requireNonNull(mob).getBoundingBox()
+                        .offset(-cameraPos.x, -cameraPos.y, -cameraPos.z); // Absolute => Relative coordinates
                 VertexConsumer buffer = Objects.requireNonNull(consumers).getBuffer(RenderLayer.getLines());// Something, you can actually write into
                 VertexRendering.drawBox(
                         Objects.requireNonNull(matrices),
