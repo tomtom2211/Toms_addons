@@ -9,8 +9,10 @@
 ### Starred mob ESP
 - Highlights dungeon starred mobs (if they are in players sight)
 
+## Supported config mods
+- Cloth config
+- Mod menu
 ## Plans:
 - Dungeon reroll profit calculator
-- UI for config (in next alpha update, decided to use cloth config / mod menu)
 - Make healer joke more customizeable 
 - Customizeable dungeon secret routes
