@@ -9,5 +9,5 @@
 ## Plans:
 - Dungeon reroll profit calculator
 - Starred mob ESP (legit)
-- UI for config
-- Make healer joke more customizable 
+- UI for config (in next alpha update, decided to use cloth config / mod menu)
+- Make healer joke more customizeable 
