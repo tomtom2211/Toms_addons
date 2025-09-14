@@ -1,5 +1,6 @@
 package io.github.tomtom2211.tomsaddons.features;
 
+import io.github.tomtom2211.tomsaddons.modconfig.Config;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
@@ -17,7 +18,7 @@ import java.util.Objects;
 public class StarredMobESP {
     public void init(WorldRenderContext context){
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null || client.world == null) return;
+        if (client.player == null || client.world == null || !Config.config.starredMobESP) return;
 
         MatrixStack matrices = context.matrixStack(); // Gives a current game view state (yaw/distance etc.)
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something

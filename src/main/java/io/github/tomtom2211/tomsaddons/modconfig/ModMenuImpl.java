@@ -20,9 +20,9 @@ public class ModMenuImpl implements ModMenuApi {
 
             // Creating the user input section
             var entryBuilder = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("enable feature"), Config.config.enableFeature)
+                    .startBooleanToggle(Text.of("Enable starred mob ESP"), Config.config.starredMobESP)
                     .setDefaultValue(true)
-                    .setSaveConsumer(newValue -> Config.config.enableFeature = newValue)
+                    .setSaveConsumer(newValue -> Config.config.starredMobESP = newValue)
                     .build();
             // Add the user input section into the general category
             general.addEntry(entryBuilder);
