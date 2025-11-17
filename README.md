@@ -19,3 +19,7 @@
 - Dungeon reroll profit calculator
 - Make healer joke more customizeable 
 - Customizeable dungeon secret routes
+- Add move GUI for Immunity timers
+
+## Known Issues
+- Bonzo's mask timer is currently only working for cata 50+ players since the timer depends on cata lvl
