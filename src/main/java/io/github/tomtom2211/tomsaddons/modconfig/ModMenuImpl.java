@@ -19,15 +19,25 @@ public class ModMenuImpl implements ModMenuApi {
             var general = builder.getOrCreateCategory(Text.of("General"));
 
             // Creating the user input section
-            var entryBuilder = builder.entryBuilder()
+            var entryBuilder1 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable starred mob ESP"), Config.config.starredMobESP)
                     .setDefaultValue(true)
                     .setSaveConsumer(newValue -> Config.config.starredMobESP = newValue)
                     .build();
+
+            var entryBuilder2 = builder.entryBuilder()
+                    .startBooleanToggle(Text.of("Enable Immunity Timers"), Config.config.immunityTimers)
+                    .setDefaultValue(true)
+                    .setSaveConsumer(newValue -> Config.config.immunityTimers = newValue)
+                    .build();
+
             // Add the user input section into the general category
-            general.addEntry(entryBuilder);
+            general.addEntry(entryBuilder1);
+            general.addEntry(entryBuilder2);
+
             // Add the save button
             builder.setSavingRunnable(Config::save);
+
             // Add the config builder into the modmenu config button
             return builder.build();
         };

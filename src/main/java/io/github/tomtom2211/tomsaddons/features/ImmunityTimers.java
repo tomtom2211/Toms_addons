@@ -1,5 +1,5 @@
 package io.github.tomtom2211.tomsaddons.features;
-
+import io.github.tomtom2211.tomsaddons.modconfig.Config;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.MinecraftClient;
@@ -24,7 +24,7 @@ public class ImmunityTimers{
                 Identifier.of("tomsaddons", "after_hotbar_1"),
                 (context, tickCounter) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
-                    if (ImmunityTimers.phoenixTimer > System.currentTimeMillis()) {
+                    if (ImmunityTimers.phoenixTimer > System.currentTimeMillis() && Config.config.immunityTimers) {
                         context.drawText(
                                 client.textRenderer,
                                 (ImmunityTimers.phoenixTimer-System.currentTimeMillis())/1000 + "s Phoenix!",
@@ -41,7 +41,7 @@ public class ImmunityTimers{
                 Identifier.of("tomsaddons", "after_hotbar_2"),
                 (context, tickCounter) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
-                    if (ImmunityTimers.bonzoTimer > System.currentTimeMillis()) {
+                    if (ImmunityTimers.bonzoTimer > System.currentTimeMillis() && Config.config.immunityTimers) {
                         context.drawText(
                                 client.textRenderer,
                                 (ImmunityTimers.bonzoTimer-System.currentTimeMillis())/1000+"s Bonzo!",
