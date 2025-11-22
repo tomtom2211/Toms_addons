@@ -46,9 +46,16 @@ public class ModMenuImpl implements ModMenuApi {
                     .setMax(3)
                     .build();
 
+            var entryBuilder5 = builder.entryBuilder()
+                    .startBooleanToggle(Text.of("Enable Instant Requeue"), Config.config.instantRequeue)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(newValue -> Config.config.instantRequeue = newValue)
+                    .build();
+
             // Add the user config section into the dungeons / mining category
             dungeons.addEntry(entryBuilder1);
             dungeons.addEntry(entryBuilder2);
+            dungeons.addEntry(entryBuilder5);
             mining.addEntry(entryBuilder3);
             mining.addEntry(entryBuilder4);
 
