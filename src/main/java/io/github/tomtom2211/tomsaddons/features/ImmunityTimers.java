@@ -3,10 +3,8 @@ import io.github.tomtom2211.tomsaddons.modconfig.Config;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.joml.Matrix3x2fStack;
 
 
 public class ImmunityTimers{

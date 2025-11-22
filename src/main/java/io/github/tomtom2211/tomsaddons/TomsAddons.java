@@ -2,6 +2,7 @@ package io.github.tomtom2211.tomsaddons;
 
 import io.github.tomtom2211.tomsaddons.features.ImmunityTimers;
 import io.github.tomtom2211.tomsaddons.features.Jokes;
+import io.github.tomtom2211.tomsaddons.features.MiningTimers;
 import io.github.tomtom2211.tomsaddons.features.StarredMobESP;
 import io.github.tomtom2211.tomsaddons.modconfig.Config;
 import net.fabricmc.api.EnvType;
@@ -30,6 +31,7 @@ public class TomsAddons implements ModInitializer {
 
         // Load HUD
         ImmunityTimers.immunityTimersHUD();
+        MiningTimers.miningTimersHUD();
 
         // Jokes.java object (for the initialization of jokeKey mechanic)
         Jokes jokes = new Jokes();
@@ -46,6 +48,7 @@ public class TomsAddons implements ModInitializer {
         // Client Receive Message event
         ClientReceiveMessageEvents.GAME.register((message, overlay) -> {
             ImmunityTimers.init(message);
+            MiningTimers.init(message);
         });
 
         // World render event
@@ -54,6 +57,7 @@ public class TomsAddons implements ModInitializer {
         // World change event
         ClientWorldEvents.AFTER_CLIENT_WORLD_CHANGE.register((client1, world) -> {
             ImmunityTimers.unload();
+            MiningTimers.unload();
         });
 
         // For debugging purposes

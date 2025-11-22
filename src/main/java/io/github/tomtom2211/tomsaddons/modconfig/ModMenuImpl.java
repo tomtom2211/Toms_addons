@@ -16,7 +16,8 @@ public class ModMenuImpl implements ModMenuApi {
                     .setTitle(Text.of("Tom's addons"));
 
             // Create general category
-            var general = builder.getOrCreateCategory(Text.of("General"));
+            var dungeons = builder.getOrCreateCategory(Text.of("Dungeons"));
+            var mining = builder.getOrCreateCategory(Text.of("Mining"));
 
             // Creating the user input section
             var entryBuilder1 = builder.entryBuilder()
@@ -31,9 +32,25 @@ public class ModMenuImpl implements ModMenuApi {
                     .setSaveConsumer(newValue -> Config.config.immunityTimers = newValue)
                     .build();
 
-            // Add the user input section into the general category
-            general.addEntry(entryBuilder1);
-            general.addEntry(entryBuilder2);
+            var entryBuilder3 = builder.entryBuilder()
+                    .startBooleanToggle(Text.of("Enable Mining Timers"), Config.config.miningTimers)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(newValue -> Config.config.miningTimers = newValue)
+                    .build();
+
+            var entryBuilder4 = builder.entryBuilder()
+                    .startIntField(Text.of("Pickubulus level"), Config.config.pickobulusLevel)
+                    .setDefaultValue(1)
+                    .setSaveConsumer(newValue -> Config.config.pickobulusLevel = newValue)
+                    .setMin(1)
+                    .setMax(3)
+                    .build();
+
+            // Add the user config section into the dungeons / mining category
+            dungeons.addEntry(entryBuilder1);
+            dungeons.addEntry(entryBuilder2);
+            mining.addEntry(entryBuilder3);
+            mining.addEntry(entryBuilder4);
 
             // Add the save button
             builder.setSavingRunnable(Config::save);

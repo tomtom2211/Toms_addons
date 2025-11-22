@@ -17,6 +17,8 @@ public class Config {
     public static Config config = new Config();
     public boolean starredMobESP = false;
     public boolean immunityTimers = false;
+    public boolean miningTimers = false;
+    public int pickobulusLevel = 1;
     public static void load(){
         // Check if the config file already exists and create one if it doesn't
         if(!FILE.exists()){
