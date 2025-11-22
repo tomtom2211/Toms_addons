@@ -22,18 +22,18 @@ public class ModMenuImpl implements ModMenuApi {
             // Creating the user input section
             var entryBuilder1 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable starred mob ESP"), Config.config.starredMobESP)
-                    .setDefaultValue(true)
+                    .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.starredMobESP = newValue)
                     .build();
 
             var entryBuilder2 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable Immunity Timers"), Config.config.immunityTimers)
-                    .setDefaultValue(true)
+                    .startBooleanToggle(Text.of("Enable immunity timers"), Config.config.immunityTimers)
+                    .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.immunityTimers = newValue)
                     .build();
 
             var entryBuilder3 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable Mining Timers"), Config.config.miningTimers)
+                    .startBooleanToggle(Text.of("Enable mining timers"), Config.config.miningTimers)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.miningTimers = newValue)
                     .build();
@@ -47,15 +47,22 @@ public class ModMenuImpl implements ModMenuApi {
                     .build();
 
             var entryBuilder5 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable Instant Requeue"), Config.config.instantRequeue)
+                    .startBooleanToggle(Text.of("Enable instant requeue"), Config.config.instantRequeue)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.instantRequeue = newValue)
+                    .build();
+
+            var entryBuilder6 = builder.entryBuilder()
+                    .startBooleanToggle(Text.of("Enable command aliases"), Config.config.commandAliases)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(newValue -> Config.config.commandAliases = newValue)
                     .build();
 
             // Add the user config section into the dungeons / mining category
             dungeons.addEntry(entryBuilder1);
             dungeons.addEntry(entryBuilder2);
             dungeons.addEntry(entryBuilder5);
+            dungeons.addEntry(entryBuilder6);
             mining.addEntry(entryBuilder3);
             mining.addEntry(entryBuilder4);
 

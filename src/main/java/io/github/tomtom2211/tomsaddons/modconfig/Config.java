@@ -18,6 +18,7 @@ public class Config {
     public boolean starredMobESP = false;
     public boolean immunityTimers = false;
     public boolean instantRequeue = false;
+    public boolean commandAliases = false;
     public boolean miningTimers = false;
     public int pickobulusLevel = 1;
     public static void load(){
