@@ -21,6 +21,7 @@ public class Config {
     public boolean commandAliases = false;
     public boolean miningTimers = false;
     public int pickobulusLevel = 1;
+    public boolean balLvl100 = false;
     public static void load(){
         // Check if the config file already exists and create one if it doesn't
         if(!FILE.exists()){

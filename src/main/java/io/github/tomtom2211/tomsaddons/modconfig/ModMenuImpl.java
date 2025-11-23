@@ -33,12 +33,24 @@ public class ModMenuImpl implements ModMenuApi {
                     .build();
 
             var entryBuilder3 = builder.entryBuilder()
+                    .startBooleanToggle(Text.of("Enable instant requeue"), Config.config.instantRequeue)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(newValue -> Config.config.instantRequeue = newValue)
+                    .build();
+
+            var entryBuilder4 = builder.entryBuilder()
+                    .startBooleanToggle(Text.of("Enable command aliases"), Config.config.commandAliases)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(newValue -> Config.config.commandAliases = newValue)
+                    .build();
+
+            var entryBuilder5 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable mining timers"), Config.config.miningTimers)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.miningTimers = newValue)
                     .build();
 
-            var entryBuilder4 = builder.entryBuilder()
+            var entryBuilder6 = builder.entryBuilder()
                     .startIntField(Text.of("Pickubulus level"), Config.config.pickobulusLevel)
                     .setDefaultValue(1)
                     .setSaveConsumer(newValue -> Config.config.pickobulusLevel = newValue)
@@ -46,25 +58,21 @@ public class ModMenuImpl implements ModMenuApi {
                     .setMax(3)
                     .build();
 
-            var entryBuilder5 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable instant requeue"), Config.config.instantRequeue)
+            var entryBuilder7 = builder.entryBuilder()
+                    .startBooleanToggle(Text.of("Legendary Bal lvl 100"), Config.config.balLvl100)
                     .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.instantRequeue = newValue)
+                    .setSaveConsumer(newValue -> Config.config.balLvl100 = newValue)
                     .build();
 
-            var entryBuilder6 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable command aliases"), Config.config.commandAliases)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.commandAliases = newValue)
-                    .build();
 
             // Add the user config section into the dungeons / mining category
             dungeons.addEntry(entryBuilder1);
             dungeons.addEntry(entryBuilder2);
-            dungeons.addEntry(entryBuilder5);
-            dungeons.addEntry(entryBuilder6);
-            mining.addEntry(entryBuilder3);
-            mining.addEntry(entryBuilder4);
+            dungeons.addEntry(entryBuilder3);
+            dungeons.addEntry(entryBuilder4);
+            mining.addEntry(entryBuilder5);
+            mining.addEntry(entryBuilder6);
+            mining.addEntry(entryBuilder7);
 
             // Add the save button
             builder.setSavingRunnable(Config::save);
