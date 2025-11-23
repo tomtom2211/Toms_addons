@@ -36,7 +36,7 @@ public class TomsAddons implements ModInitializer {
         StarredMobESP starredMobESP = new StarredMobESP();
 
         // Keybinds
-        KeyBinding jokeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny healer jokeKey", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
+        KeyBinding jokeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny healer joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
 
         //  End client tick event
         ClientTickEvents.END_CLIENT_TICK.register(client -> jokes.init(jokeKey));

@@ -4,6 +4,7 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import net.minecraft.text.Text;
+import java.util.List;
 
 
 public class ModMenuImpl implements ModMenuApi {
@@ -57,12 +58,28 @@ public class ModMenuImpl implements ModMenuApi {
                     .setMin(1)
                     .setMax(3)
                     .build();
-
             var entryBuilder7 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Legendary Bal lvl 100"), Config.config.balLvl100)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.balLvl100 = newValue)
                     .build();
+
+            var entryBuilder8 = builder.entryBuilder()
+                    .startStringDropdownMenu((Text.of("Select Drill Engine")), Config.config.drillEngine)
+                    .setDefaultValue("None")
+                    .setSelections(
+                            List.of(
+                            "None",
+                            "Mithril-Infused",
+                            "Titanium-Infused",
+                            "Gemstone",
+                            "Perfectly-Cut"
+                            )
+                    )
+                    .setSuggestionMode(false)
+                    .setSaveConsumer(newValue -> Config.config.drillEngine = newValue)
+                    .build();
+
 
 
             // Add the user config section into the dungeons / mining category
@@ -73,6 +90,7 @@ public class ModMenuImpl implements ModMenuApi {
             mining.addEntry(entryBuilder5);
             mining.addEntry(entryBuilder6);
             mining.addEntry(entryBuilder7);
+            mining.addEntry(entryBuilder8);
 
             // Add the save button
             builder.setSavingRunnable(Config::save);

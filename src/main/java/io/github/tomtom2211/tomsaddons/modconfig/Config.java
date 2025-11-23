@@ -3,7 +3,6 @@ package io.github.tomtom2211.tomsaddons.modconfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.github.tomtom2211.tomsaddons.TomsAddons;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -22,6 +21,7 @@ public class Config {
     public boolean miningTimers = false;
     public int pickobulusLevel = 1;
     public boolean balLvl100 = false;
+    public String drillEngine = "None";
     public static void load(){
         // Check if the config file already exists and create one if it doesn't
         if(!FILE.exists()){

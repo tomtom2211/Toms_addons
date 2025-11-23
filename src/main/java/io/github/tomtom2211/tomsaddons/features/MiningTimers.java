@@ -10,45 +10,67 @@ import net.minecraft.util.Identifier;
 public class MiningTimers {
     public static long pickobulusTimer = 0;
     public static long miningSpeedTimer = 0;
+    public static double cooldownReduction = 0;
 
     public static void init(Text msg) {
+        cooldownReduction = 0;
+        // Drill engine cooldown reduction
+        switch(Config.config.drillEngine){
+            case "None":
+                break;
+            case "Mithril-Infused":
+                cooldownReduction += 0.02;
+                break;
+            case "Titanium-Infused":
+                cooldownReduction += 0.04;
+                break;
+            case "Gemstone":
+                cooldownReduction += 0.06;
+                break;
+            case "Perfectly-Cut":
+                cooldownReduction += 0.1;
+                break;
+        }
+        // Pickobulus pickaxe ability set timer
         if (msg.getString().toLowerCase().contains("you used your pickobulus pickaxe ability!")) {
             switch (Config.config.pickobulusLevel) {
                 case 1:
-                    if(Config.config.balLvl100){
-                        pickobulusTimer = System.currentTimeMillis() + 54000;
+                    if(Config.config.balLvl100 ){
+                        pickobulusTimer = (long) (System.currentTimeMillis() + (54000*(1-cooldownReduction)));
                     }
                     else{
-                    pickobulusTimer = System.currentTimeMillis() + 60000;
+                    pickobulusTimer = (long) (System.currentTimeMillis() + (60000*(1-cooldownReduction)));
                     }
                     break;
                 case 2:
                     if(Config.config.balLvl100) {
-                        pickobulusTimer = System.currentTimeMillis() + 45000;
+                        pickobulusTimer = (long) (System.currentTimeMillis() + (45000*(1-cooldownReduction)));
                     }
                     else{
-                        pickobulusTimer = System.currentTimeMillis() + 50000;
+                        pickobulusTimer = (long) (System.currentTimeMillis() + (50000*(1-cooldownReduction)));
                     }
                     break;
                 case 3:
                     if(Config.config.balLvl100) {
-                        pickobulusTimer = System.currentTimeMillis() + 36000;
+                        pickobulusTimer = (long) (System.currentTimeMillis() + (36000*(1-cooldownReduction)));
                     }
                     else{
-                        pickobulusTimer = System.currentTimeMillis() + 40000;
+                        pickobulusTimer = (long) (System.currentTimeMillis() + (40000*(1-cooldownReduction)));
                     }
                     break;
             }
-        } else if (msg.getString().toLowerCase().contains("you used your mining speed boost pickaxe ability!")) {
+        }
+        // Mining speed boost ability set timer
+        else if (msg.getString().toLowerCase().contains("you used your mining speed boost pickaxe ability!")) {
             if(Config.config.balLvl100) {
-                miningSpeedTimer = System.currentTimeMillis() + 162000;
+                miningSpeedTimer = (long) (System.currentTimeMillis() + (108000*(1-cooldownReduction)));
             }
             else{
-                miningSpeedTimer = System.currentTimeMillis() + 180000;
+                miningSpeedTimer = (long) (System.currentTimeMillis() + (120000*(1-cooldownReduction)));
             }
         }
     }
-
+    // Registering HUD
     public static void miningTimersHUD() {
         HudElementRegistry.attachElementAfter(
                 VanillaHudElements.HOTBAR, // layer to attach after
@@ -78,6 +100,7 @@ public class MiningTimers {
                 }
         );
     }
+    // After lobby swap unload the timers
     public static void unload(){
         MiningTimers.pickobulusTimer = 0;
         MiningTimers.miningSpeedTimer = 0;
