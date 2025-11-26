@@ -38,4 +38,5 @@
 ## Known Issues
 - Bonzo's mask timer is currently only working for cata 50+ players since the timer depends on cata lvl
 - MiningTimers dont take into count Sky Mall / Mineshaft Mayhem
-- Starred Mob Esp seems to crash occasionally (unknown reason)
+- Starred Mob Esp seems to crash occasionally (unknown reason) - possibly solved, needs testing
+- Instant requeue does'nt care if somebody leaves the party
