@@ -16,6 +16,7 @@ public class Config {
     public static Config config = new Config();
     public boolean starredMobESP = false;
     public boolean immunityTimers = false;
+    public int cataLVL = 50;
     public boolean instantRequeue = false;
     public boolean commandAliases = false;
     public boolean miningTimers = false;

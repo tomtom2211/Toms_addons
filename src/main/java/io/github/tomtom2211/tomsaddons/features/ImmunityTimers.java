@@ -17,7 +17,7 @@ public class ImmunityTimers{
             serverTimer = System.currentTimeMillis() + 3000;
         }
         else if(msg.getString().toLowerCase().contains("your bonzo's mask")){
-            bonzoTimer = System.currentTimeMillis() + 180000;
+            bonzoTimer = System.currentTimeMillis() + (360000 - (Config.config.cataLVL * 3600L));
             serverTimer = System.currentTimeMillis() + 3000;
         }
     }
