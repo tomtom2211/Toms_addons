@@ -36,6 +36,15 @@ public class InstantRequeue {
                     1.2f
             );
         }
+        if(msg.getString().toLowerCase().contains("has left the party.") && client.player != null && Config.config.instantRequeue){
+            toggle = false;
+            client.player.playSound(
+                    SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
+                    0.5f,
+                    1.2f
+            );
+        }
+
 
     }
 }
