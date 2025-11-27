@@ -24,7 +24,7 @@ public class StarredMobESP {
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something
         Vec3d cameraPos = context.camera().getPos(); // Camera position
         for (Entity entity : client.world.getEntities()) {
-            if (entity instanceof ArmorStandEntity armorStand && client.player.canSee(armorStand) && armorStand.getName().getString().contains("✯") && armorStand.isCustomNameVisible())
+            if (entity instanceof ArmorStandEntity armorStand && client.player.canSee(armorStand) && armorStand.getName().getString().contains("✯"))
             {
                 int mobId = armorStand.getId() - 1;
                 Entity mob = client.world.getEntityById(mobId);
