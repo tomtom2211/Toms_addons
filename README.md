@@ -15,6 +15,7 @@
 ### Instant requeue
 - Instantly requeues instances after each run.
 - Supports chat command !dt.
+- Checks if someone leaves the party and automatically stops requeue
 - Plays Chime Noteblock sound whenever !dt is written in chat / on dungeon enter / on instance requeue.
 ### Command aliases
 - Creates aliases for /joindungeon commands (for example: /m7).
@@ -36,7 +37,8 @@
 - Add move GUI for Immunity timers
 
 ## Known Issues
-- Bonzo's mask timer is currently only working for cata 50+ players since the timer depends on cata lvl
+- Bonzo's mask timer is currently only working for cata 50+ players since the timer depends on cata lvl - temporary solved by adding a manual config option for cata lvl scaling
 - MiningTimers dont take into count Sky Mall / Mineshaft Mayhem
 - Starred Mob Esp seems to crash occasionally (unknown reason) - possibly solved, needs testing
-- Instant requeue does'nt care if somebody leaves the party
+- Instant requeue does'nt care if somebody leaves the party - solved in v.0.0.8
+- The path to the config file is hardcoded which is 
