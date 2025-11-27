@@ -32,6 +32,7 @@ public class ModMenuImpl implements ModMenuApi {
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.immunityTimers = newValue)
                     .build();
+
             var entryBuilder3 = builder.entryBuilder()
                     .startIntField(Text.of("Catacombs lvl"), Config.config.cataLVL)
                     .setMax(50)
