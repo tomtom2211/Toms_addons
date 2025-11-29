@@ -16,6 +16,9 @@ public class Config {
     public static Config config = new Config();
     public boolean starredMobESP = false;
     public boolean immunityTimers = false;
+    public boolean bonzoMask = true;
+    public boolean spiritMask = true;
+    public boolean phoenixPet = true;
     public int cataLVL = 50;
     public boolean instantRequeue = false;
     public boolean commandAliases = false;
