@@ -13,8 +13,6 @@ import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
-import java.util.Objects;
-
 public class StarredMobESP {
     public void init(WorldRenderContext context){
         MinecraftClient client = MinecraftClient.getInstance();
@@ -24,19 +22,20 @@ public class StarredMobESP {
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something
         Vec3d cameraPos = context.camera().getPos(); // Camera position
         for (Entity entity : client.world.getEntities()) {
-            if (entity instanceof ArmorStandEntity armorStand && client.player.canSee(armorStand) && armorStand.getName().getString().contains("✯"))
-            {
+            if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().contains("✯")) {
                 int mobId = armorStand.getId() - 1;
                 Entity mob = client.world.getEntityById(mobId);
-                Box box = Objects.requireNonNull(mob).getBoundingBox()
-                        .offset(-cameraPos.x, -cameraPos.y, -cameraPos.z); // Absolute => Relative coordinates
-                VertexConsumer buffer = Objects.requireNonNull(consumers).getBuffer(RenderLayer.getLines());// Something, you can actually write into
-                VertexRendering.drawBox(
-                        Objects.requireNonNull(matrices),
-                        buffer,
-                        box,
-                        1.0f, 0.0f, 0.0f, 1.0f // RGBA = red
-                );
+                if (mob != null && consumers != null && matrices != null) {
+                    Box box = mob.getBoundingBox()
+                            .offset(-cameraPos.x, -cameraPos.y, -cameraPos.z); // Absolute => Relative coordinates
+                    VertexConsumer buffer = consumers.getBuffer(RenderLayer.getLines());// Something, you can actually write into
+                    VertexRendering.drawBox(
+                            matrices,
+                            buffer,
+                            box,
+                            1.0f, 0.0f, 0.0f, 1.0f // RGBA = red
+                    );
+                }
             }
         }
     }
