@@ -78,7 +78,7 @@ public class ModMenuImpl implements ModMenuApi {
                     .build();
 
             var entryBuilder10 = builder.entryBuilder()
-                    .startIntField(Text.of("Pickubulus level"), Config.config.pickobulusLevel)
+                    .startIntField(Text.of("Pickobulus level"), Config.config.pickobulusLevel)
                     .setDefaultValue(1)
                     .setSaveConsumer(newValue -> Config.config.pickobulusLevel = newValue)
                     .setMin(1)
