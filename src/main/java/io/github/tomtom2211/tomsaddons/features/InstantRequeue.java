@@ -21,11 +21,6 @@ public class InstantRequeue {
 
         if(msg.getString().toLowerCase().contains("entered") && msg.getString().toLowerCase().contains("catacombs, floor") && client.player != null && Config.config.instantRequeue){
             toggle = true;
-            client.player.playSound(
-                    SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
-                    0.5f,
-                    1.2f
-            );
         }
 
         if(msg.getString().toLowerCase().contains("!dt") && client.player != null && Config.config.instantRequeue){
