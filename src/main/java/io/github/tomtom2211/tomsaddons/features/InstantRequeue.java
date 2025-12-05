@@ -36,7 +36,7 @@ public class InstantRequeue {
                     1.2f
             );
         }
-        if(msg.getString().toLowerCase().contains("has left the party.") && client.player != null && Config.config.instantRequeue){
+        if((msg.getString().toLowerCase().contains("has left the party.") || msg.getString().toLowerCase().contains("has been removed from the party.")) && client.player != null && Config.config.instantRequeue){
             toggle = false;
             client.player.playSound(
                     SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
