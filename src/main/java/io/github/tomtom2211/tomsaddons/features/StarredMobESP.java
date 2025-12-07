@@ -17,13 +17,14 @@ import net.minecraft.util.math.Vec3d;
 public class StarredMobESP {
     public void init(WorldRenderContext context){
         MinecraftClient client = MinecraftClient.getInstance();
+
         if (client.player == null || client.world == null || !Config.config.starredMobESP) return;
 
         MatrixStack matrices = context.matrixStack(); // Gives a current game view state (yaw/distance etc.)
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something
         Vec3d cameraPos = context.camera().getPos(); // Camera position
         for (Entity entity : client.world.getEntities()) {
-            if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().contains("✯")) {
+            if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().replaceAll("✯","").length()+1 == armorStand.getName().getString().length()) {
                 int mobId = armorStand.getId();
                 Entity mob = client.world.getEntityById(mobId);
                 if (mob != null && consumers != null && matrices != null) {
