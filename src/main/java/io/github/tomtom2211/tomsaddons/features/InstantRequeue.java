@@ -18,8 +18,16 @@ public class InstantRequeue {
                     1.2f
             );
         }
+        if(msg.getString().toLowerCase().contains("good job everyone.") && Config.config.instantRequeue && toggle && client.getNetworkHandler() != null && client.player != null){
+            client.getNetworkHandler().sendChatCommand("instancerequeue");
+            client.player.playSound(
+                    SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
+                    0.5f,
+                    1.2f
+            );
+        }
 
-        if(msg.getString().toLowerCase().contains("entered") && msg.getString().toLowerCase().contains("catacombs, floor") && client.player != null && Config.config.instantRequeue){
+        if(msg.getString().toLowerCase().contains("entered") && client.player != null && Config.config.instantRequeue){
             toggle = true;
         }
 
