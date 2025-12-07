@@ -15,6 +15,7 @@ public class Config {
 
     public static Config config = new Config();
     public boolean starredMobESP = false;
+    public double starredMobESPScale = 1;
     public boolean immunityTimers = false;
     public boolean bonzoMask = true;
     public boolean spiritMask = true;

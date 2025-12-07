@@ -28,30 +28,38 @@ public class ModMenuImpl implements ModMenuApi {
                     .build();
 
             var entryBuilder2 = builder.entryBuilder()
+                    .startDoubleField(Text.of("Starred mob ESP scale"), Config.config.starredMobESPScale)
+                    .setDefaultValue(1)
+                    .setMax(10)
+                    .setMin(0)
+                    .setSaveConsumer(newValue -> Config.config.starredMobESPScale = newValue)
+                    .build();
+
+            var entryBuilder3 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable immunity timers"), Config.config.immunityTimers)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.immunityTimers = newValue)
                     .build();
 
-            var entryBuilder3 = builder.entryBuilder()
+            var entryBuilder4 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Bonzo's mask"), Config.config.bonzoMask)
                     .setDefaultValue(true)
                     .setSaveConsumer(newValue -> Config.config.bonzoMask = newValue)
                     .build();
 
-            var entryBuilder4 = builder.entryBuilder()
+            var entryBuilder5 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Spirit mask"), Config.config.spiritMask)
                     .setDefaultValue(true)
                     .setSaveConsumer(newValue -> Config.config.spiritMask = newValue)
                     .build();
 
-            var entryBuilder5 = builder.entryBuilder()
+            var entryBuilder6 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Phoenix pet"), Config.config.phoenixPet)
                     .setDefaultValue(true)
                     .setSaveConsumer(newValue -> Config.config.phoenixPet = newValue)
                     .build();
 
-            var entryBuilder6 = builder.entryBuilder()
+            var entryBuilder7 = builder.entryBuilder()
                     .startIntField(Text.of("Catacombs lvl"), Config.config.cataLVL)
                     .setMax(50)
                     .setMin(0)
@@ -59,38 +67,40 @@ public class ModMenuImpl implements ModMenuApi {
                     .setSaveConsumer(newValue -> Config.config.cataLVL = newValue)
                     .build();
 
-            var entryBuilder7 = builder.entryBuilder()
+            var entryBuilder8 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable instant requeue"), Config.config.instantRequeue)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.instantRequeue = newValue)
                     .build();
 
-            var entryBuilder8 = builder.entryBuilder()
+            var entryBuilder9 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable command aliases"), Config.config.commandAliases)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.commandAliases = newValue)
                     .build();
 
-            var entryBuilder9 = builder.entryBuilder()
+
+            var entryBuilder10 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable mining timers"), Config.config.miningTimers)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.miningTimers = newValue)
                     .build();
 
-            var entryBuilder10 = builder.entryBuilder()
+            var entryBuilder11 = builder.entryBuilder()
                     .startIntField(Text.of("Pickobulus level"), Config.config.pickobulusLevel)
                     .setDefaultValue(1)
                     .setSaveConsumer(newValue -> Config.config.pickobulusLevel = newValue)
                     .setMin(1)
                     .setMax(3)
                     .build();
-            var entryBuilder11 = builder.entryBuilder()
+
+            var entryBuilder12 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Legendary Bal lvl 100"), Config.config.balLvl100)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.balLvl100 = newValue)
                     .build();
 
-            var entryBuilder12 = builder.entryBuilder()
+            var entryBuilder13 = builder.entryBuilder()
                     .startStringDropdownMenu((Text.of("Select Drill Engine")), Config.config.drillEngine)
                     .setDefaultValue("None")
                     .setSelections(
@@ -117,10 +127,11 @@ public class ModMenuImpl implements ModMenuApi {
             dungeons.addEntry(entryBuilder6);
             dungeons.addEntry(entryBuilder7);
             dungeons.addEntry(entryBuilder8);
-            mining.addEntry(entryBuilder9);
+            dungeons.addEntry(entryBuilder9);
             mining.addEntry(entryBuilder10);
             mining.addEntry(entryBuilder11);
             mining.addEntry(entryBuilder12);
+            mining.addEntry(entryBuilder13);
 
             // Add the save button
             builder.setSavingRunnable(Config::save);

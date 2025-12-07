@@ -13,6 +13,7 @@ import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
+
 public class StarredMobESP {
     public void init(WorldRenderContext context){
         MinecraftClient client = MinecraftClient.getInstance();
@@ -23,11 +24,12 @@ public class StarredMobESP {
         Vec3d cameraPos = context.camera().getPos(); // Camera position
         for (Entity entity : client.world.getEntities()) {
             if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().contains("✯")) {
-                int mobId = armorStand.getId() - 1;
+                int mobId = armorStand.getId();
                 Entity mob = client.world.getEntityById(mobId);
                 if (mob != null && consumers != null && matrices != null) {
                     Box box = mob.getBoundingBox()
-                            .offset(-cameraPos.x, -cameraPos.y, -cameraPos.z); // Absolute => Relative coordinates
+                            .expand(Config.config.starredMobESPScale*0.5, 1, Config.config.starredMobESPScale*0.5)
+                            .offset(-cameraPos.x, -cameraPos.y - 1, -cameraPos.z); // Absolute => Relative coordinates
                     VertexConsumer buffer = consumers.getBuffer(RenderLayer.getLines());// Something, you can actually write into
                     VertexRendering.drawBox(
                             matrices,
