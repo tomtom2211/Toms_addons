@@ -11,8 +11,14 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.mob.MagmaCubeEntity;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +27,8 @@ import org.slf4j.LoggerFactory;
 
 public class TomsAddons implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("TomsAddons");
+    public static final MinecraftClient client = MinecraftClient.getInstance();
+    public static String side;
     @Override
     public void onInitialize() {
 
@@ -30,6 +38,24 @@ public class TomsAddons implements ModInitializer {
         // Load HUD
         ImmunityTimers.immunityTimersHUD();
         MiningTimers.miningTimersHUD();
+
+        HudElementRegistry.attachElementAfter(
+                VanillaHudElements.HOTBAR, // layer to attach after
+                Identifier.of("tomsaddons", "after_hotbar_10"),
+                (context, tickCounter) -> {
+                    MinecraftClient client = MinecraftClient.getInstance();
+                    if (side != null) {
+                        context.drawText(
+                                client.textRenderer,
+                                side,
+                                (client.getWindow().getScaledWidth() / 2)+10,
+                                client.getWindow().getScaledHeight() / 2-10,
+                                0xffff0000,
+                                true
+                        );
+                    }
+                }
+        );
 
         // Jokes.java object (for the initialization of jokeKey mechanic)
         Jokes jokes = new Jokes();
@@ -52,7 +78,28 @@ public class TomsAddons implements ModInitializer {
         ClientReceiveMessageEvents.ALLOW_GAME.register((message, overlay) -> CommandAliases.supressUnknownCommand(message));
 
         // World render event
-        WorldRenderEvents.AFTER_ENTITIES.register(starredMobESP::init);
+        WorldRenderEvents.AFTER_ENTITIES.register(context -> {
+                starredMobESP.init(context);
+                if(client.world != null) {
+                    for (Entity entity : client.world.getEntities()) {
+                        if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getPos().y<35 && magmaCube.getSize() > 20){
+                            if(magmaCube.getPos().x < -128){
+                                side = "RIGHT";
+                            }
+                            else if(magmaCube.getPos().x > -72){
+                                side = "LEFT";
+                            }
+                            else if(magmaCube.getPos().z > -84){
+                                side = "FRONT";
+                            }
+                            else if(magmaCube.getPos().z < -132){
+                                side = "BACK";
+                            }
+                        }
+
+                    }
+                }
+        });
 
         // World change event
         ClientWorldEvents.AFTER_CLIENT_WORLD_CHANGE.register((client1, world) -> {
