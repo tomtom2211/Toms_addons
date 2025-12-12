@@ -22,8 +22,8 @@ public class KuudraPredict {
                         context.drawText(
                                 client.textRenderer,
                                 side,
-                                (client.getWindow().getScaledWidth() / 2)+10,
-                                client.getWindow().getScaledHeight() / 2-10,
+                                (client.getWindow().getScaledWidth() / 2)+Config.config.kuudraPredictionX,
+                                (client.getWindow().getScaledHeight() / 2)+Config.config.kuudraPredictionY,
                                 0xffff0000,
                                 true
                         );

@@ -21,7 +21,8 @@ public class ModMenuImpl implements ModMenuApi {
             var mining = builder.getOrCreateCategory(Text.of("Mining"));
             var kuudra = builder.getOrCreateCategory(Text.of("Kuudra"));
 
-            // Creating the user input section
+            // Dungeons
+
             var entryBuilder1 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable starred mob ESP"), Config.config.starredMobESP)
                     .setDefaultValue(false)
@@ -80,6 +81,7 @@ public class ModMenuImpl implements ModMenuApi {
                     .setSaveConsumer(newValue -> Config.config.commandAliases = newValue)
                     .build();
 
+            // Mining
 
             var entryBuilder10 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable mining timers"), Config.config.miningTimers)
@@ -117,15 +119,27 @@ public class ModMenuImpl implements ModMenuApi {
                     .setSaveConsumer(newValue -> Config.config.drillEngine = newValue)
                     .build();
 
+            // Kuudra
+
             var entryBuilder14 = builder.entryBuilder()
                     .startBooleanToggle(Text.of("Enable kuudra prediction"), Config.config.kuudraPrediction)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.kuudraPrediction = newValue)
                     .build();
+            var entryBuilder15 = builder.entryBuilder()
+                    .startIntField(Text.of("Kuudra prediction X"), Config.config.kuudraPredictionX)
+                    .setDefaultValue(10)
+                    .setSaveConsumer(newValue -> Config.config.kuudraPredictionX = newValue)
+                    .build();
+            var entryBuilder16 = builder.entryBuilder()
+                    .startIntField(Text.of("Kuudra prediction Y"), Config.config.kuudraPredictionY)
+                    .setDefaultValue(-10)
+                    .setSaveConsumer(newValue -> Config.config.kuudraPredictionY = newValue)
+                    .build();
 
 
 
-            // Add the user config section into the dungeons / mining category
+            // Add the user config section into the dungeons / mining category / kuudra
             dungeons.addEntry(entryBuilder1);
             dungeons.addEntry(entryBuilder2);
             dungeons.addEntry(entryBuilder3);
@@ -140,6 +154,8 @@ public class ModMenuImpl implements ModMenuApi {
             mining.addEntry(entryBuilder12);
             mining.addEntry(entryBuilder13);
             kuudra.addEntry(entryBuilder14);
+            kuudra.addEntry(entryBuilder15);
+            kuudra.addEntry(entryBuilder16);
 
             // Add the save button
             builder.setSavingRunnable(Config::save);

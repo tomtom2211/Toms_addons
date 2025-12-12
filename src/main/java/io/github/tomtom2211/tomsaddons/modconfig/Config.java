@@ -29,6 +29,8 @@ public class Config {
     public boolean balLvl100 = false;
     public String drillEngine = "None";
     public boolean kuudraPrediction = false;
+    public int kuudraPredictionX = 0;
+    public int kuudraPredictionY = 0;
 
     public static void load(){
         // Check if the config file already exists and create one if it doesn't
