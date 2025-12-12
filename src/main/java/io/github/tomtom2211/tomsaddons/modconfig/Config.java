@@ -13,6 +13,7 @@ public class Config {
     private static final File FILE = new File("config/tomsaddons.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+    // Config options
     public static Config config = new Config();
     public boolean starredMobESP = false;
     public double starredMobESPScale = 1;
@@ -27,6 +28,8 @@ public class Config {
     public int pickobulusLevel = 1;
     public boolean balLvl100 = false;
     public String drillEngine = "None";
+    public boolean kuudraPrediction = false;
+
     public static void load(){
         // Check if the config file already exists and create one if it doesn't
         if(!FILE.exists()){
