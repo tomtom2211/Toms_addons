@@ -17,7 +17,6 @@ import net.minecraft.util.math.Vec3d;
 public class StarredMobESP {
     public void init(WorldRenderContext context){
         MinecraftClient client = MinecraftClient.getInstance();
-
         if (client.player == null || client.world == null || !Config.config.starredMobESP) return;
 
         MatrixStack matrices = context.matrixStack(); // Gives a current game view state (yaw/distance etc.)

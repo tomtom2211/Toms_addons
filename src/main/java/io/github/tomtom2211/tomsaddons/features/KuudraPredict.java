@@ -23,8 +23,8 @@ public class KuudraPredict {
                                 client.textRenderer,
                                 side,
                                 (client.getWindow().getScaledWidth() / 2)+Config.config.kuudraPredictionX,
-                                (client.getWindow().getScaledHeight() / 2)+Config.config.kuudraPredictionY,
-                                0xffff0000,
+                                (client.getWindow().getScaledHeight() / 2)-Config.config.kuudraPredictionY,
+                                (Config.config.kuudraPreHUDColor & 0x00FFFFFF) | 0xFF000000,
                                 true
                         );
                     }
@@ -32,7 +32,7 @@ public class KuudraPredict {
         );
     }
     public static void init(){
-        if(client.world != null && Config.config.kuudraPrediction) {
+        if(client.world != null && client.player != null && Config.config.kuudraPrediction && !Config.config.forceKuudraPredictionHUD  && client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
             for (Entity entity : client.world.getEntities()) {
                 if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getPos().y<35 && magmaCube.getSize() > 20){
                     if(magmaCube.getPos().x < -128){
@@ -47,14 +47,17 @@ public class KuudraPredict {
                     else if(magmaCube.getPos().z < -132){
                         side = "BACK";
                     }
-                    else{
-                        side = null;
-                    }
                 }
-
             }
         }
+        else if (Config.config.forceKuudraPredictionHUD){
+                side = "FORCED";
+        }
+        else{
+            side = null;
+        }
     }
+
     public static void unload(){
         side = null;
     }

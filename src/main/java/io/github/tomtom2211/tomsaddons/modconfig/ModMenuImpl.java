@@ -122,19 +122,32 @@ public class ModMenuImpl implements ModMenuApi {
             // Kuudra
 
             var entryBuilder14 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable kuudra prediction"), Config.config.kuudraPrediction)
+                    .startBooleanToggle(Text.of("Enable Kuudra prediction"), Config.config.kuudraPrediction)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.kuudraPrediction = newValue)
                     .build();
             var entryBuilder15 = builder.entryBuilder()
-                    .startIntField(Text.of("Kuudra prediction X"), Config.config.kuudraPredictionX)
+                    .startIntField(Text.of("Prediction X"), Config.config.kuudraPredictionX)
                     .setDefaultValue(10)
                     .setSaveConsumer(newValue -> Config.config.kuudraPredictionX = newValue)
                     .build();
             var entryBuilder16 = builder.entryBuilder()
-                    .startIntField(Text.of("Kuudra prediction Y"), Config.config.kuudraPredictionY)
+                    .startIntField(Text.of("Prediction Y"), Config.config.kuudraPredictionY)
                     .setDefaultValue(-10)
                     .setSaveConsumer(newValue -> Config.config.kuudraPredictionY = newValue)
+                    .build();
+            var entryBuilder17 = builder.entryBuilder()
+                    .startBooleanToggle(Text.of("Force prediction HUD"), Config.config.forceKuudraPredictionHUD)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(newValue -> Config.config.forceKuudraPredictionHUD = newValue)
+                    .build();
+
+            var entryBuilder18 = builder.entryBuilder()
+                    //.startColorField(Text.of("Prediction Hud Color"), Config.config.hudColor)
+                    .startAlphaColorField(Text.of("Prediction Hud Color"), Config.config.kuudraPreHUDColor)
+                    .setAlphaMode(false)
+                    .setDefaultValue(0x00ffff)
+                    .setSaveConsumer(newValue -> Config.config.kuudraPreHUDColor = newValue)
                     .build();
 
 
@@ -156,7 +169,8 @@ public class ModMenuImpl implements ModMenuApi {
             kuudra.addEntry(entryBuilder14);
             kuudra.addEntry(entryBuilder15);
             kuudra.addEntry(entryBuilder16);
-
+            kuudra.addEntry(entryBuilder17);
+            kuudra.addEntry(entryBuilder18);
             // Add the save button
             builder.setSavingRunnable(Config::save);
 
