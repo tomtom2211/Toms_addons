@@ -143,8 +143,7 @@ public class ModMenuImpl implements ModMenuApi {
                     .build();
 
             var entryBuilder18 = builder.entryBuilder()
-                    //.startColorField(Text.of("Prediction Hud Color"), Config.config.hudColor)
-                    .startAlphaColorField(Text.of("Prediction Hud Color"), Config.config.kuudraPreHUDColor)
+                    .startColorField(Text.of("Prediction Hud Color"), Config.config.kuudraPreHUDColor)
                     .setAlphaMode(false)
                     .setDefaultValue(0x00ffff)
                     .setSaveConsumer(newValue -> Config.config.kuudraPreHUDColor = newValue)

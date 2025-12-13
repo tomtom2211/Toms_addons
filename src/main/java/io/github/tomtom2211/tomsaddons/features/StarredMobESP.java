@@ -23,7 +23,7 @@ public class StarredMobESP {
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something
         Vec3d cameraPos = context.camera().getPos(); // Camera position
         for (Entity entity : client.world.getEntities()) {
-            if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().replaceAll("✯","").length()+1 == armorStand.getName().getString().length()) {
+            if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().replaceAll("✯","").length()+1 == armorStand.getName().getString().length() && client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
                 int mobId = armorStand.getId();
                 Entity mob = client.world.getEntityById(mobId);
                 if (mob != null && consumers != null && matrices != null) {
