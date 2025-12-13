@@ -153,13 +153,13 @@ public class ModMenuImpl implements ModMenuApi {
             // General
 
             var entryBuilder19 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Highlight used-shuriken mobs"), Config.config.highlightShurikenMobs)
+                    .startBooleanToggle(Text.of("Shuriken Mob ESP"), Config.config.highlightShurikenMobs)
                     .setDefaultValue(false)
                     .setSaveConsumer(newValue -> Config.config.highlightShurikenMobs = newValue)
                     .build();
 
             var entryBuilder20 = builder.entryBuilder()
-                    .startDoubleField(Text.of("Shuriken mob ESP scale"), Config.config.shurikenMobESPScale)
+                    .startDoubleField(Text.of("Shuriken Mob ESP Scale"), Config.config.shurikenMobESPScale)
                     .setDefaultValue(1)
                     .setMax(10)
                     .setMin(0)
@@ -167,14 +167,14 @@ public class ModMenuImpl implements ModMenuApi {
                     .build();
 
             var entryBuilder21 = builder.entryBuilder()
-                    .startColorField(Text.of("Shuriken mob ESP color"), Config.config.shurikenMobESPColor)
+                    .startColorField(Text.of("Shuriken Mob ESP Color"), Config.config.shurikenMobESPColor)
                     .setAlphaMode(false)
                     .setDefaultValue(0x00ffff)
                     .setSaveConsumer(newValue -> Config.config.shurikenMobESPColor = newValue)
                     .build();
 
             var entryBuilder22 = builder.entryBuilder()
-                    .startColorField(Text.of("Shuriken mob ESP color"), Config.config.starredMobESPColor)
+                    .startColorField(Text.of("Starred Mob ESP Color"), Config.config.starredMobESPColor)
                     .setAlphaMode(false)
                     .setDefaultValue(0xff0000)
                     .setSaveConsumer(newValue -> Config.config.starredMobESPColor = newValue)
