@@ -17,7 +17,7 @@
 - Highlights dungeon starred mobs (if they are in players sight)
 
 ### Immunity Timers
-- Displays timers for immunity items (Bonzo's mask and Phoenix pet)
+- Displays timers for immunity items (Bonzo's mask, Spirit mask and Phoenix pet)
   
 ### Instant requeue
 - Instantly requeues instances after each run.
