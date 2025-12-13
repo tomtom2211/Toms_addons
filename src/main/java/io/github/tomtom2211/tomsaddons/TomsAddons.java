@@ -33,16 +33,12 @@ public class TomsAddons implements ModInitializer {
         MiningTimers.miningTimersHUD();
         KuudraPredict.kuudraPredictHUD();
 
-        // Jokes.java object (for the initialization of jokeKey mechanic)
-        Jokes jokes = new Jokes();
-        StarredMobESP starredMobESP = new StarredMobESP();
-
         // Keybinds
-        KeyBinding jokeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny healer joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
+        KeyBinding jokeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny cata joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
 
         //  End client tick event
         ClientTickEvents.END_CLIENT_TICK.register(client ->{
-            jokes.init(jokeKey);
+            Jokes.init(jokeKey);
             KuudraPredict.init();
         });
 
@@ -57,7 +53,10 @@ public class TomsAddons implements ModInitializer {
         ClientReceiveMessageEvents.ALLOW_GAME.register((message, overlay) -> CommandAliases.supressUnknownCommand(message));
 
         // World render event
-        WorldRenderEvents.AFTER_ENTITIES.register(starredMobESP::init);
+        WorldRenderEvents.AFTER_ENTITIES.register(context -> {
+            StarredMobESP.init(context);
+            ShurikenMobESP.init(context);
+        });
         // World change event
         ClientWorldEvents.AFTER_CLIENT_WORLD_CHANGE.register((client1, world) -> {
             ImmunityTimers.unload();

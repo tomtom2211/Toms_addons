@@ -14,29 +14,29 @@ import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
-
-public class StarredMobESP {
-    public static void init(WorldRenderContext context){
+public class ShurikenMobESP{
+    public static void init(WorldRenderContext context) {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null || client.world == null || !Config.config.starredMobESP) return;
+        if (client.player == null || client.world == null || !Config.config.highlightShurikenMobs) return;
 
         MatrixStack matrices = context.matrixStack(); // Gives a current game view state (yaw/distance etc.)
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something
         Vec3d cameraPos = context.camera().getPos(); // Camera position
+
         for (Entity entity : client.world.getEntities()) {
-            if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().replaceAll("✯","").length()+1 == armorStand.getName().getString().length() && client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
+            if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().replaceAll("✯", "").length() + 1 == armorStand.getName().getString().length() && !client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
                 int mobId = armorStand.getId();
                 Entity mob = client.world.getEntityById(mobId);
                 if (mob != null && consumers != null && matrices != null) {
                     Box box = mob.getBoundingBox()
-                            .expand(Config.config.starredMobESPScale*0.5, 1, Config.config.starredMobESPScale*0.5)
+                            .expand(Config.config.shurikenMobESPScale * 0.5, 1, Config.config.shurikenMobESPScale * 0.5)
                             .offset(-cameraPos.x, -cameraPos.y - 1, -cameraPos.z); // Absolute => Relative coordinates
                     VertexConsumer buffer = consumers.getBuffer(RenderLayer.getLines());// Something, you can actually write into
                     VertexRendering.drawBox(
                             matrices,
                             buffer,
                             box,
-                            ColorUtils.hexToRGBA(Config.config.starredMobESPColor,"red"), ColorUtils.hexToRGBA(Config.config.starredMobESPColor,"green"), ColorUtils.hexToRGBA(Config.config.starredMobESPColor,"blue"), 1.0f // RGBA = red
+                            ColorUtils.hexToRGBA(Config.config.shurikenMobESPColor,"red"), ColorUtils.hexToRGBA(Config.config.shurikenMobESPColor,"green"), ColorUtils.hexToRGBA(Config.config.shurikenMobESPColor,"blue"), 1.0f // RGBA = red
                     );
                 }
             }

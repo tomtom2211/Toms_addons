@@ -17,9 +17,10 @@ public class ModMenuImpl implements ModMenuApi {
                     .setTitle(Text.of("Tom's addons"));
 
             // Create general category
+            var general = builder.getOrCreateCategory(Text.of("General"));
             var dungeons = builder.getOrCreateCategory(Text.of("Dungeons"));
-            var mining = builder.getOrCreateCategory(Text.of("Mining"));
             var kuudra = builder.getOrCreateCategory(Text.of("Kuudra"));
+            var mining = builder.getOrCreateCategory(Text.of("Mining"));
 
             // Dungeons
 
@@ -149,12 +150,45 @@ public class ModMenuImpl implements ModMenuApi {
                     .setSaveConsumer(newValue -> Config.config.kuudraPreHUDColor = newValue)
                     .build();
 
+            // General
+
+            var entryBuilder19 = builder.entryBuilder()
+                    .startBooleanToggle(Text.of("Highlight used-shuriken mobs"), Config.config.highlightShurikenMobs)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(newValue -> Config.config.highlightShurikenMobs = newValue)
+                    .build();
+
+            var entryBuilder20 = builder.entryBuilder()
+                    .startDoubleField(Text.of("Shuriken mob ESP scale"), Config.config.shurikenMobESPScale)
+                    .setDefaultValue(1)
+                    .setMax(10)
+                    .setMin(0)
+                    .setSaveConsumer(newValue -> Config.config.shurikenMobESPScale = newValue)
+                    .build();
+
+            var entryBuilder21 = builder.entryBuilder()
+                    .startColorField(Text.of("Shuriken mob ESP color"), Config.config.shurikenMobESPColor)
+                    .setAlphaMode(false)
+                    .setDefaultValue(0x00ffff)
+                    .setSaveConsumer(newValue -> Config.config.shurikenMobESPColor = newValue)
+                    .build();
+
+            var entryBuilder22 = builder.entryBuilder()
+                    .startColorField(Text.of("Shuriken mob ESP color"), Config.config.starredMobESPColor)
+                    .setAlphaMode(false)
+                    .setDefaultValue(0xff0000)
+                    .setSaveConsumer(newValue -> Config.config.starredMobESPColor = newValue)
+                    .build();
 
 
-            // Add the user config section into the dungeons / mining category / kuudra
+            // Add the user config section into the general / dungeons / kuudra / mining categories
+            general.addEntry(entryBuilder19);
+            general.addEntry(entryBuilder20);
+            general.addEntry(entryBuilder21);
             dungeons.addEntry(entryBuilder1);
             dungeons.addEntry(entryBuilder2);
             dungeons.addEntry(entryBuilder3);
+            dungeons.addEntry(entryBuilder22);
             dungeons.addEntry(entryBuilder4);
             dungeons.addEntry(entryBuilder5);
             dungeons.addEntry(entryBuilder6);
@@ -170,6 +204,7 @@ public class ModMenuImpl implements ModMenuApi {
             kuudra.addEntry(entryBuilder16);
             kuudra.addEntry(entryBuilder17);
             kuudra.addEntry(entryBuilder18);
+
             // Add the save button
             builder.setSavingRunnable(Config::save);
 

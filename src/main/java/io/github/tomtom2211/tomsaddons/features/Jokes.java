@@ -2,14 +2,17 @@ package io.github.tomtom2211.tomsaddons.features;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
+
+
 import java.util.Objects;
 import java.util.Random;
 
 public class Jokes {
-    Random rand = new Random(); // For random numbers
-    public Long buttonPressTime = System.currentTimeMillis(); // Used for delays
-    MinecraftClient mcClient = MinecraftClient.getInstance(); // Minecraft client instance
-    public String[] jokes = {
+    private static final Random rand = new Random(); // For random numbers
+    public static Long buttonPressTime = System.currentTimeMillis(); // Used for delays
+    private static final MinecraftClient mcClient = MinecraftClient.getInstance(); // Minecraft client instance
+
+    public static String[] jokes = {
             "Why did the Healer bring a pickaxe to dungeons? Because it was the only way they'd ever get carried.",
             "What’s a Healer’s favorite weapon? The Party Finder 'kick' button.",
             "How do you make a Healer feel useful? Pretend you actually need him.",
@@ -43,9 +46,9 @@ public class Jokes {
 
             "How do you know the Tank is having a bad day? The Archer is the one tanking the hits."
     };
-    public void init(KeyBinding joke){
-        if(joke.wasPressed() && System.currentTimeMillis()-buttonPressTime>=1000) {
-            int randomNum = rand.nextInt((jokes.length)-1);
+    public static void init(KeyBinding jokeKey){
+        if(jokeKey.wasPressed() && System.currentTimeMillis()-Jokes.buttonPressTime>=1000) {
+            int randomNum = rand.nextInt((Jokes.jokes.length)-1);
             Objects.requireNonNull(mcClient.getNetworkHandler()).sendChatMessage(jokes[randomNum]);
             buttonPressTime = System.currentTimeMillis();
         }

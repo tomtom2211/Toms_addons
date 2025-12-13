@@ -19,6 +19,7 @@ public class Config {
     public static Config config = new Config();
     public boolean starredMobESP = false;
     public double starredMobESPScale = 1;
+    public int starredMobESPColor = 0xff0000;
     public boolean immunityTimers = false;
     public boolean bonzoMask = true;
     public boolean spiritMask = true;
@@ -35,6 +36,9 @@ public class Config {
     public int kuudraPredictionY = 0;
     public boolean forceKuudraPredictionHUD = false;
     public int kuudraPreHUDColor = 0x00ffff;
+    public boolean highlightShurikenMobs = false;
+    public double shurikenMobESPScale = 1;
+    public int shurikenMobESPColor = 0x00ffff;
 
     public static void load(){
         // Check if the config file already exists and create one if it doesn't
