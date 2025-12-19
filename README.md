@@ -1,25 +1,37 @@
-# Tom's addons
+#  Tom's addons
 - Simple open source hypixel skyblock mod written in java.
 
 ## Features:
 
+## General category:
+### Shuriken Mob ESP
+- Highlights mobs hit by an Extremely Real Shuriken outside of Dungeon and Kuudra instances
+  
 ## Dungeons category:
-### Healer joke
+### Cata joke
 - Technically a chat macro, so use at your own risk!
 - Sends a joke into the chat on a keybind press (default: "J")
 - Currently includes 50 random jokes
+
 ### Starred mob ESP
 - Highlights dungeon starred mobs (if they are in players sight)
+
 ### Immunity Timers
-- Displays timers for immunity items (Bonzo's mask and Phoenix pet)
+- Displays timers for immunity items (Bonzo's mask, Spirit mask and Phoenix pet)
+  
 ### Instant requeue
 - Instantly requeues instances after each run.
 - Supports chat command !dt.
 - Checks if someone leaves the party and automatically stops requeue
 - Plays Chime Noteblock sound whenever !dt is written in chat / on dungeon enter / on instance requeue.
+
 ### Command aliases
 - Creates aliases for /joindungeon commands (for example: /m7).
 - Hides Unknown Command messages.
+
+## Kuudra category:
+### Kuudra Prediction
+- Predicts Kuudra Tier V last-phase peek sides
 
 ## Mining category:
 ### Mining Timers
@@ -34,11 +46,8 @@
 - Dungeon reroll profit calculator
 - Make healer joke more customizeable 
 - Customizeable dungeon secret routes
-- Add move GUI for Immunity timers
+- Add move GUI config
 
 ## Known Issues
-- Bonzo's mask timer is currently only working for cata 50+ players since the timer depends on cata lvl - temporary solved by adding a manual config option for cata lvl scaling
 - MiningTimers dont take into count Sky Mall / Mineshaft Mayhem
-- Starred Mob Esp seems to crash occasionally (unknown reason) - possibly solved, needs testing
-- Instant requeue does'nt care if somebody leaves the party - solved in v.0.0.8
-- The path to the config file is hardcoded which is 
+- The path to the config file is hardcoded which is not the best solution
