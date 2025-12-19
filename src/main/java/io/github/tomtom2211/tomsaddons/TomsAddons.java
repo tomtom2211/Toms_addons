@@ -27,6 +27,7 @@ public class TomsAddons implements ModInitializer {
 
         // Load saved configs
         Config.load();
+        Jokes.load();
 
         // Load HUD
         ImmunityTimers.immunityTimersHUD();
