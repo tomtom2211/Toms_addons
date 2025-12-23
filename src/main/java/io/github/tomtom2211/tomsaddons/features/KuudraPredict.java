@@ -18,13 +18,13 @@ public class KuudraPredict {
                 Identifier.of("tomsaddons", "after_hotbar_10"),
                 (context, tickCounter) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
-                    if (side != null && Config.config.kuudraPrediction) {
+                    if (side != null && Config.kuudraPrediction) {
                         context.drawText(
                                 client.textRenderer,
                                 side,
-                                (client.getWindow().getScaledWidth() / 2)+Config.config.kuudraPredictionX,
-                                (client.getWindow().getScaledHeight() / 2)-Config.config.kuudraPredictionY,
-                                (Config.config.kuudraPreHUDColor & 0x00FFFFFF) | 0xFF000000,
+                                (client.getWindow().getScaledWidth() / 2)+Config.kuudraPredictionX,
+                                (client.getWindow().getScaledHeight() / 2)-Config.kuudraPredictionY,
+                                Config.kuudraPreHUDColor.getRGB(),
                                 true
                         );
                     }
@@ -32,7 +32,7 @@ public class KuudraPredict {
         );
     }
     public static void init(){
-        if(client.world != null && client.player != null && Config.config.kuudraPrediction && !Config.config.forceKuudraPredictionHUD  && client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
+        if(client.world != null && client.player != null && Config.kuudraPrediction && !Config.forceKuudraPredictionHUD  && client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
             for (Entity entity : client.world.getEntities()) {
                 if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getPos().y<35 && magmaCube.getSize() > 20){
                     if(magmaCube.getPos().x < -128){
@@ -50,7 +50,7 @@ public class KuudraPredict {
                 }
             }
         }
-        else if (Config.config.forceKuudraPredictionHUD){
+        else if (Config.forceKuudraPredictionHUD){
                 side = "FORCED";
         }
         else{

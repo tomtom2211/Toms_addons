@@ -26,7 +26,7 @@ public class TomsAddons implements ModInitializer {
     public void onInitialize() {
 
         // Load saved configs
-        Config.load();
+        Config.HANDLER.load();
         Jokes.load();
 
         // Load HUD

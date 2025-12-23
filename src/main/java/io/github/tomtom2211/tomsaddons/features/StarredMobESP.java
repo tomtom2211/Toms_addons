@@ -1,7 +1,6 @@
 package io.github.tomtom2211.tomsaddons.features;
 
 import io.github.tomtom2211.tomsaddons.modconfig.Config;
-import io.github.tomtom2211.tomsaddons.utils.ColorUtils;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
@@ -16,9 +15,10 @@ import net.minecraft.util.math.Vec3d;
 
 
 public class StarredMobESP {
+
     public static void init(WorldRenderContext context){
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null || client.world == null || !Config.config.starredMobESP) return;
+        if (client.player == null || client.world == null || !Config.starredMobESP) return;
 
         MatrixStack matrices = context.matrixStack(); // Gives a current game view state (yaw/distance etc.)
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something
@@ -29,14 +29,14 @@ public class StarredMobESP {
                 Entity mob = client.world.getEntityById(mobId);
                 if (mob != null && consumers != null && matrices != null) {
                     Box box = mob.getBoundingBox()
-                            .expand(Config.config.starredMobESPScale*0.5, 1, Config.config.starredMobESPScale*0.5)
+                            .expand(Config.starredMobESPScale*0.5, 1, Config.starredMobESPScale*0.5)
                             .offset(-cameraPos.x, -cameraPos.y - 1, -cameraPos.z); // Absolute => Relative coordinates
                     VertexConsumer buffer = consumers.getBuffer(RenderLayer.getLines());// Something, you can actually write into
                     VertexRendering.drawBox(
                             matrices,
                             buffer,
                             box,
-                            ColorUtils.hexToRGBA(Config.config.starredMobESPColor,"red"), ColorUtils.hexToRGBA(Config.config.starredMobESPColor,"green"), ColorUtils.hexToRGBA(Config.config.starredMobESPColor,"blue"), 1.0f // RGBA = red
+                            Config.starredMobESPColor.getRed()/255.0f, Config.starredMobESPColor.getGreen()/255.0f, Config.starredMobESPColor.getBlue()/255.0f, Config.starredMobESPColor.getAlpha()/255.0f // RGBA = red
                     );
                 }
             }

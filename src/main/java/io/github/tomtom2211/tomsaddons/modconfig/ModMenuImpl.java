@@ -1,217 +1,238 @@
 package io.github.tomtom2211.tomsaddons.modconfig;
 
+
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import me.shedaniel.clothconfig2.api.ConfigBuilder;
+import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.*;
 import net.minecraft.text.Text;
-import java.util.List;
 
+import java.awt.*;
 
 public class ModMenuImpl implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> {
-            // Create builder instance
-            ConfigBuilder builder = ConfigBuilder.create()
-                    .setParentScreen(parent)
-                    .setTitle(Text.of("Tom's addons"));
+        return parentScreen -> YetAnotherConfigLib.createBuilder()
+                .title(Text.of("Tom's addons"))
+                .save(() -> Config.HANDLER.save())
 
-            // Create general category
-            var general = builder.getOrCreateCategory(Text.of("General"));
-            var dungeons = builder.getOrCreateCategory(Text.of("Dungeons"));
-            var kuudra = builder.getOrCreateCategory(Text.of("Kuudra"));
-            var mining = builder.getOrCreateCategory(Text.of("Mining"));
+                // General
 
-            // Dungeons
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.of("General"))
+                        .tooltip(Text.of("Useful stuff for skyblock."))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.of("Shuriken Mob ESP"))
+                                .description(OptionDescription.of(Text.of("Highlights mobs hit with extremely real shuriken.")))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Toggle"))
+                                        .description(OptionDescription.of(Text.of("Toggles shuriken mob ESP")))
+                                        .binding(false, () -> Config.shurikenMobESP, newVal -> Config.shurikenMobESP = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Double>createBuilder()
+                                        .name(Text.of("Scale"))
+                                        .description(OptionDescription.of(Text.of("Makes the ESP bigger")))
+                                        .binding(1.0, () -> Config.shurikenMobESPScale, newVal -> Config.shurikenMobESPScale = newVal)
+                                        .controller(opt -> DoubleSliderControllerBuilder.create(opt)
+                                                .range(0.1, 10.0)
+                                                .step(0.1))
+                                        .build())
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.of("Color"))
+                                        .description(OptionDescription.of(Text.of("Sets the color of the ESP outline")))
+                                        .binding(Color.cyan, () -> Config.shurikenMobESPColor, newVal -> Config.shurikenMobESPColor = newVal)
+                                        .controller(opt -> ColorControllerBuilder.create(opt)
+                                                .allowAlpha(true))
+                                        .build())
+                                .build())
 
-            var entryBuilder1 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable starred mob ESP"), Config.config.starredMobESP)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.starredMobESP = newValue)
-                    .build();
+                        .build())
 
-            var entryBuilder2 = builder.entryBuilder()
-                    .startDoubleField(Text.of("Starred mob ESP scale"), Config.config.starredMobESPScale)
-                    .setDefaultValue(1)
-                    .setMax(10)
-                    .setMin(0)
-                    .setSaveConsumer(newValue -> Config.config.starredMobESPScale = newValue)
-                    .build();
+                // Dungeons
 
-            var entryBuilder3 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable immunity timers"), Config.config.immunityTimers)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.immunityTimers = newValue)
-                    .build();
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.of("Dungeons"))
+                        .tooltip(Text.of("Useful stuff for dungeons."))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.of("Starred Mob ESP"))
+                                .description(OptionDescription.of(Text.of("Highlights starred mobs in dungeons.")))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Toggle"))
+                                        .description(OptionDescription.of(Text.of("Toggles starred mob ESP")))
+                                        .binding(false, () -> Config.starredMobESP, newVal -> Config.starredMobESP = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Double>createBuilder()
+                                        .name(Text.of("Scale"))
+                                        .description(OptionDescription.of(Text.of("Makes the ESP bigger")))
+                                        .binding(1.0, () -> Config.starredMobESPScale, newVal -> Config.starredMobESPScale = newVal)
+                                        .controller(opt -> DoubleSliderControllerBuilder.create(opt)
+                                                .range(0.1, 10.0)
+                                                .step(0.1))
+                                        .build())
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.of("Color"))
+                                        .description(OptionDescription.of(Text.of("Sets the color of the ESP outline")))
+                                        .binding(Color.red, () -> Config.starredMobESPColor, newVal -> Config.starredMobESPColor = newVal)
+                                        .controller(opt -> ColorControllerBuilder.create(opt)
+                                                .allowAlpha(true))
+                                        .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.of("Immunity Timers"))
+                                .description(OptionDescription.of(Text.of("Displays immunity cooldowns for phoenix, bonzo's mask, spirit mask.")))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Toggle"))
+                                        .description(OptionDescription.of(Text.of("Toggles Immunity Timers")))
+                                        .binding(false, () -> Config.immunityTimers, newVal -> Config.immunityTimers = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Phoenix"))
+                                        .description(OptionDescription.of(Text.of("Toggle phoenix timer")))
+                                        .binding(true, () -> Config.phoenixPet, newVal -> Config.phoenixPet = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Bonzo's mask"))
+                                        .description(OptionDescription.of(Text.of("Toggle bonzo's mask timer")))
+                                        .binding(true, () -> Config.bonzoMask, newVal -> Config.bonzoMask = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Spirit mask"))
+                                        .description(OptionDescription.of(Text.of("Toggle Spirit Mask Timer")))
+                                        .binding(true, () -> Config.spiritMask, newVal -> Config.spiritMask = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.of("Catacombs level"))
+                                        .description(OptionDescription.of(Text.of("Used for bonzo's mask cooldown reduction calculation.")))
+                                        .binding(50, () -> Config.cataLVL, newVal -> Config.cataLVL = newVal)
+                                        .controller(opt -> IntegerFieldControllerBuilder.create(opt)
+                                                .range(0, 50))
+                                        .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.of("Command Aliases"))
+                                .description(OptionDescription.of(Text.of("Makes aliases for /joindungeon commands (for example /m7).")))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Toggle"))
+                                        .description(OptionDescription.of(Text.of("Toggles Command Aliases.")))
+                                        .binding(false, () -> Config.commandAliases, newVal -> Config.commandAliases = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.of("Instant requeue"))
+                                .description(OptionDescription.of(Text.of("Instantly re-queues after dungeon/kuudra run ends.")))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Toggle"))
+                                        .description(OptionDescription.of(Text.of("Toggles Command Aliases.")))
+                                        .binding(false, () -> Config.instantRequeue, newVal -> Config.instantRequeue = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .build())
+                        .build())
 
-            var entryBuilder4 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Bonzo's mask"), Config.config.bonzoMask)
-                    .setDefaultValue(true)
-                    .setSaveConsumer(newValue -> Config.config.bonzoMask = newValue)
-                    .build();
+                // Kuudra
 
-            var entryBuilder5 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Spirit mask"), Config.config.spiritMask)
-                    .setDefaultValue(true)
-                    .setSaveConsumer(newValue -> Config.config.spiritMask = newValue)
-                    .build();
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.of("Kuudra"))
+                        .tooltip(Text.of("Useful stuff for Kuudra."))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.of("Kuudra prediction"))
+                                .description(OptionDescription.of(Text.of("Predicts Kuudra Tier V last-phase peek sides.")))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Toggle"))
+                                        .description(OptionDescription.of(Text.of("Toggles Kuudra Prediction.")))
+                                        .binding(false, () -> Config.kuudraPrediction, newVal -> Config.kuudraPrediction = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
 
-            var entryBuilder6 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Phoenix pet"), Config.config.phoenixPet)
-                    .setDefaultValue(true)
-                    .setSaveConsumer(newValue -> Config.config.phoenixPet = newValue)
-                    .build();
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Force"))
+                                        .description(OptionDescription.of(Text.of("Forces Kuudra Prediction (used for moving gui).")))
+                                        .binding(false, () -> Config.forceKuudraPredictionHUD, newVal -> Config.forceKuudraPredictionHUD = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
 
-            var entryBuilder7 = builder.entryBuilder()
-                    .startIntField(Text.of("Catacombs lvl"), Config.config.cataLVL)
-                    .setMax(50)
-                    .setMin(0)
-                    .setDefaultValue(50)
-                    .setSaveConsumer(newValue -> Config.config.cataLVL = newValue)
-                    .build();
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.of("Set X"))
+                                        .description(OptionDescription.of(Text.of("Moves the Kuudra's Prediction HUD from the centre. ")))
+                                        .binding(10, () -> Config.kuudraPredictionX, newVal -> Config.kuudraPredictionX = newVal)
+                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .build())
 
-            var entryBuilder8 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable instant requeue"), Config.config.instantRequeue)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.instantRequeue = newValue)
-                    .build();
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.of("Set Y"))
+                                        .description(OptionDescription.of(Text.of("Moves the Kuudra's Prediction HUD from the centre.")))
+                                        .binding(0, () -> Config.kuudraPredictionY, newVal -> Config.kuudraPredictionY = newVal)
+                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .build())
 
-            var entryBuilder9 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable command aliases"), Config.config.commandAliases)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.commandAliases = newValue)
-                    .build();
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.of("Color"))
+                                        .description(OptionDescription.of(Text.of("Sets the color of the ESP outline")))
+                                        .binding(Color.cyan, () -> Config.kuudraPreHUDColor, newVal -> Config.kuudraPreHUDColor = newVal)
+                                        .controller(opt -> ColorControllerBuilder.create(opt)
+                                                .allowAlpha(true))
+                                        .build())
+                                .build())
+                        .build())
 
-            // Mining
+                // Mining
 
-            var entryBuilder10 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable mining timers"), Config.config.miningTimers)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.miningTimers = newValue)
-                    .build();
+                .category(ConfigCategory.createBuilder()
+                        .name(Text.of("Mining"))
+                        .tooltip(Text.of("Useful stuff for Mining."))
+                        .group(OptionGroup.createBuilder()
+                                .name(Text.of("Mining Timers"))
+                                .description(OptionDescription.of(Text.of("Displays current cooldowns of mining abilities (pickobulus/mining speed boost).")))
 
-            var entryBuilder11 = builder.entryBuilder()
-                    .startIntField(Text.of("Pickobulus level"), Config.config.pickobulusLevel)
-                    .setDefaultValue(1)
-                    .setSaveConsumer(newValue -> Config.config.pickobulusLevel = newValue)
-                    .setMin(1)
-                    .setMax(3)
-                    .build();
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Toggle"))
+                                        .description(OptionDescription.of(Text.of("Toggles Mining Timers.")))
+                                        .binding(false, () -> Config.miningTimers, newVal -> Config.miningTimers = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
 
-            var entryBuilder12 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Legendary Bal lvl 100"), Config.config.balLvl100)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.balLvl100 = newValue)
-                    .build();
+                                .option(Option.<Color>createBuilder()
+                                        .name(Text.of("Color"))
+                                        .description(OptionDescription.of(Text.of("Sets the color of the ESP outline")))
+                                        .binding(Color.green, () -> Config.miningTimersColor, newVal -> Config.miningTimersColor = newVal)
+                                        .controller(opt -> ColorControllerBuilder.create(opt)
+                                                .allowAlpha(true))
+                                        .build())
 
-            var entryBuilder13 = builder.entryBuilder()
-                    .startStringDropdownMenu((Text.of("Select Drill Engine")), Config.config.drillEngine)
-                    .setDefaultValue("None")
-                    .setSelections(
-                            List.of(
-                            "None",
-                            "Mithril-Infused",
-                            "Titanium-Infused",
-                            "Gemstone",
-                            "Perfectly-Cut"
-                            )
-                    )
-                    .setSuggestionMode(false)
-                    .setSaveConsumer(newValue -> Config.config.drillEngine = newValue)
-                    .build();
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Bal lvl 100"))
+                                        .description(OptionDescription.of(Text.of("Toggle if you are using legendary bal pet lvl 100.")))
+                                        .binding(false, () -> Config.balLvl100, newVal -> Config.balLvl100 = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
 
-            // Kuudra
+                                .option(Option.<String>createBuilder()
+                                        .name(Text.of("Drill Engine"))
+                                        .description(OptionDescription.of(Text.of("Select if you are using drill engine.")))
+                                        .binding("None", () -> Config.drillEngine, newVal -> Config.drillEngine = newVal)
+                                        .controller(opt -> DropdownStringControllerBuilder.create(opt)
+                                                .values("None", "Mithril-Infused", "Titanium-Infused", "Gemstone", "Perfectly-Cut"))
+                                        .build())
 
-            var entryBuilder14 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Enable Kuudra prediction"), Config.config.kuudraPrediction)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.kuudraPrediction = newValue)
-                    .build();
-            var entryBuilder15 = builder.entryBuilder()
-                    .startIntField(Text.of("Prediction X"), Config.config.kuudraPredictionX)
-                    .setDefaultValue(10)
-                    .setSaveConsumer(newValue -> Config.config.kuudraPredictionX = newValue)
-                    .build();
-            var entryBuilder16 = builder.entryBuilder()
-                    .startIntField(Text.of("Prediction Y"), Config.config.kuudraPredictionY)
-                    .setDefaultValue(-10)
-                    .setSaveConsumer(newValue -> Config.config.kuudraPredictionY = newValue)
-                    .build();
-            var entryBuilder17 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Force prediction HUD"), Config.config.forceKuudraPredictionHUD)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.forceKuudraPredictionHUD = newValue)
-                    .build();
-
-            var entryBuilder18 = builder.entryBuilder()
-                    .startColorField(Text.of("Prediction Hud Color"), Config.config.kuudraPreHUDColor)
-                    .setAlphaMode(false)
-                    .setDefaultValue(0x00ffff)
-                    .setSaveConsumer(newValue -> Config.config.kuudraPreHUDColor = newValue)
-                    .build();
-
-            // General
-
-            var entryBuilder19 = builder.entryBuilder()
-                    .startBooleanToggle(Text.of("Shuriken Mob ESP"), Config.config.highlightShurikenMobs)
-                    .setDefaultValue(false)
-                    .setSaveConsumer(newValue -> Config.config.highlightShurikenMobs = newValue)
-                    .build();
-
-            var entryBuilder20 = builder.entryBuilder()
-                    .startDoubleField(Text.of("Shuriken Mob ESP Scale"), Config.config.shurikenMobESPScale)
-                    .setDefaultValue(1)
-                    .setMax(10)
-                    .setMin(0)
-                    .setSaveConsumer(newValue -> Config.config.shurikenMobESPScale = newValue)
-                    .build();
-
-            var entryBuilder21 = builder.entryBuilder()
-                    .startColorField(Text.of("Shuriken Mob ESP Color"), Config.config.shurikenMobESPColor)
-                    .setAlphaMode(false)
-                    .setDefaultValue(0x00ffff)
-                    .setSaveConsumer(newValue -> Config.config.shurikenMobESPColor = newValue)
-                    .build();
-
-            var entryBuilder22 = builder.entryBuilder()
-                    .startColorField(Text.of("Starred Mob ESP Color"), Config.config.starredMobESPColor)
-                    .setAlphaMode(false)
-                    .setDefaultValue(0xff0000)
-                    .setSaveConsumer(newValue -> Config.config.starredMobESPColor = newValue)
-                    .build();
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Text.of("Pickobulus Level"))
+                                        .description(OptionDescription.of(Text.of("Set your pickobulus level.")))
+                                        .binding(1, () -> Config.pickobulusLevel, newVal -> Config.pickobulusLevel = newVal)
+                                        .controller(opt -> IntegerFieldControllerBuilder.create(opt)
+                                                .range(1, 3))
+                                        .build())
 
 
-            // Add the user config section into the general / dungeons / kuudra / mining categories
-            general.addEntry(entryBuilder19);
-            general.addEntry(entryBuilder20);
-            general.addEntry(entryBuilder21);
-            dungeons.addEntry(entryBuilder1);
-            dungeons.addEntry(entryBuilder2);
-            dungeons.addEntry(entryBuilder3);
-            dungeons.addEntry(entryBuilder22);
-            dungeons.addEntry(entryBuilder4);
-            dungeons.addEntry(entryBuilder5);
-            dungeons.addEntry(entryBuilder6);
-            dungeons.addEntry(entryBuilder7);
-            dungeons.addEntry(entryBuilder8);
-            dungeons.addEntry(entryBuilder9);
-            mining.addEntry(entryBuilder10);
-            mining.addEntry(entryBuilder11);
-            mining.addEntry(entryBuilder12);
-            mining.addEntry(entryBuilder13);
-            kuudra.addEntry(entryBuilder14);
-            kuudra.addEntry(entryBuilder15);
-            kuudra.addEntry(entryBuilder16);
-            kuudra.addEntry(entryBuilder17);
-            kuudra.addEntry(entryBuilder18);
-
-            // Add the save button
-            builder.setSavingRunnable(Config::save);
-
-            // Add the config builder into the modmenu config button
-            return builder.build();
-        };
+                                .build())
+                        .build())
+                .build()
+                .generateScreen(parentScreen);
     }
-
 }
-

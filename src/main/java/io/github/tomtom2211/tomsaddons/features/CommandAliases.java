@@ -7,7 +7,7 @@ import net.minecraft.text.Text;
 public class CommandAliases {
     public static void init(String command) {
         MinecraftClient client = MinecraftClient.getInstance();
-        if(client.getNetworkHandler() != null && Config.config.commandAliases) {
+        if (client.getNetworkHandler() != null && Config.commandAliases) {
             switch (command) {
                 // Floors f0–f7
                 case "f0":
@@ -61,7 +61,8 @@ public class CommandAliases {
             }
         }
     }
-    public static boolean supressUnknownCommand(Text msg){
-        return !msg.getString().toLowerCase().contains("unknown command") || !Config.config.commandAliases;
+
+    public static boolean supressUnknownCommand(Text msg) {
+        return !msg.getString().toLowerCase().contains("unknown command") || !Config.commandAliases;
     }
 }

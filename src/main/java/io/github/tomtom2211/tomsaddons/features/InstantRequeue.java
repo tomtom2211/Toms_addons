@@ -10,7 +10,7 @@ public class InstantRequeue {
     public static void init(Text msg){
         MinecraftClient client = MinecraftClient.getInstance();
 
-        if(msg.getString().toLowerCase().contains("to re-queue") && Config.config.instantRequeue && toggle && client.getNetworkHandler() != null && client.player != null){
+        if(msg.getString().toLowerCase().contains("to re-queue") && Config.instantRequeue && toggle && client.getNetworkHandler() != null && client.player != null){
             client.getNetworkHandler().sendChatCommand("instancerequeue");
             client.player.playSound(
                     SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
@@ -18,7 +18,7 @@ public class InstantRequeue {
                     1.2f
             );
         }
-        if(msg.getString().toLowerCase().contains("good job everyone.") && Config.config.instantRequeue && toggle && client.getNetworkHandler() != null && client.player != null){
+        if(msg.getString().toLowerCase().contains("good job everyone.") && Config.instantRequeue && toggle && client.getNetworkHandler() != null && client.player != null){
             client.getNetworkHandler().sendChatCommand("instancerequeue");
             client.player.playSound(
                     SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
@@ -27,11 +27,11 @@ public class InstantRequeue {
             );
         }
 
-        if(msg.getString().toLowerCase().contains("entered") && client.player != null && Config.config.instantRequeue){
+        if(msg.getString().toLowerCase().contains("entered") && client.player != null && Config.instantRequeue){
             toggle = true;
         }
 
-        if(msg.getString().toLowerCase().contains("!dt") && client.player != null && Config.config.instantRequeue){
+        if(msg.getString().toLowerCase().contains("!dt") && client.player != null && Config.instantRequeue){
             toggle = false;
             client.player.playSound(
                     SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
@@ -39,7 +39,7 @@ public class InstantRequeue {
                     1.2f
             );
         }
-        if((msg.getString().toLowerCase().contains("has left the party.") || msg.getString().toLowerCase().contains("has been removed from the party.")) && client.player != null && Config.config.instantRequeue){
+        if((msg.getString().toLowerCase().contains("has left the party.") || msg.getString().toLowerCase().contains("has been removed from the party.")) && client.player != null && Config.instantRequeue){
             toggle = false;
             client.player.playSound(
                     SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),

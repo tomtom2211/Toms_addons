@@ -18,7 +18,7 @@ public class ImmunityTimers{
             serverTimer = System.currentTimeMillis() + 3000;
         }
         else if(msg.getString().toLowerCase().contains("your bonzo's mask") || msg.getString().toLowerCase().contains("your ⚚ bonzo's mask")){
-            bonzoTimer = System.currentTimeMillis() + (360000 - (Config.config.cataLVL * 3600L));
+            bonzoTimer = System.currentTimeMillis() + (360000 - (Config.cataLVL * 3600L));
             serverTimer = System.currentTimeMillis() + 3000;
         }
         else if(msg.getString().toLowerCase().contains("your spirit mask")){
@@ -32,7 +32,7 @@ public class ImmunityTimers{
                 Identifier.of("tomsaddons", "after_hotbar_1"),
                 (context, tickCounter) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
-                    if (ImmunityTimers.bonzoTimer > System.currentTimeMillis() && Config.config.immunityTimers && Config.config.bonzoMask) {
+                    if (ImmunityTimers.bonzoTimer > System.currentTimeMillis() && Config.immunityTimers && Config.bonzoMask) {
                         context.drawText(
                                 client.textRenderer,
                                 "Bonzo!" + " (" + (ImmunityTimers.bonzoTimer-System.currentTimeMillis())/1000 + "s)",
@@ -49,7 +49,7 @@ public class ImmunityTimers{
                 Identifier.of("tomsaddons", "after_hotbar_2"),
                 (context, tickCounter) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
-                    if (ImmunityTimers.phoenixTimer > System.currentTimeMillis() && Config.config.immunityTimers && Config.config.phoenixPet) {
+                    if (ImmunityTimers.phoenixTimer > System.currentTimeMillis() && Config.immunityTimers && Config.phoenixPet) {
                         context.drawText(
                                 client.textRenderer,
                                 "Phoenix!" + " (" + (ImmunityTimers.phoenixTimer-System.currentTimeMillis())/1000 + "s)",
@@ -67,7 +67,7 @@ public class ImmunityTimers{
                 Identifier.of("tomsaddons", "after_hotbar_3"),
                 (context, tickCounter) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
-                    if (ImmunityTimers.spiritTimer > System.currentTimeMillis() && Config.config.immunityTimers && Config.config.spiritMask) {
+                    if (ImmunityTimers.spiritTimer > System.currentTimeMillis() && Config.immunityTimers && Config.spiritMask) {
                         context.drawText(
                                 client.textRenderer,
                                 "Spirit!" + " (" + (ImmunityTimers.spiritTimer-System.currentTimeMillis())/1000 + "s)",
@@ -85,7 +85,7 @@ public class ImmunityTimers{
                 Identifier.of("tomsaddons", "after_hotbar_5"),
                 (context, tickCounter) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
-                    if (ImmunityTimers.serverTimer > System.currentTimeMillis() && Config.config.immunityTimers) {
+                    if (ImmunityTimers.serverTimer > System.currentTimeMillis() && Config.immunityTimers) {
                         double timer = (ImmunityTimers.serverTimer-System.currentTimeMillis())/1000.0;
                         context.drawText(
                                 client.textRenderer,

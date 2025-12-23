@@ -1,69 +1,70 @@
 package io.github.tomtom2211.tomsaddons.modconfig;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.github.tomtom2211.tomsaddons.TomsAddons;
+import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
+import dev.isxander.yacl3.config.v2.api.SerialEntry;
+import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Identifier;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
 
 public class Config {
-
-    private static final File FILE = new File("config/tomsaddons.json");
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
     // Config options
-    public static Config config = new Config();
-    public boolean starredMobESP = false;
-    public double starredMobESPScale = 1;
-    public int starredMobESPColor = 0xff0000;
-    public boolean immunityTimers = false;
-    public boolean bonzoMask = true;
-    public boolean spiritMask = true;
-    public boolean phoenixPet = true;
-    public int cataLVL = 50;
-    public boolean instantRequeue = false;
-    public boolean commandAliases = false;
-    public boolean miningTimers = false;
-    public int pickobulusLevel = 1;
-    public boolean balLvl100 = false;
-    public String drillEngine = "None";
-    public boolean kuudraPrediction = false;
-    public int kuudraPredictionX = 0;
-    public int kuudraPredictionY = 0;
-    public boolean forceKuudraPredictionHUD = false;
-    public int kuudraPreHUDColor = 0x00ffff;
-    public boolean highlightShurikenMobs = false;
-    public double shurikenMobESPScale = 1;
-    public int shurikenMobESPColor = 0x00ffff;
+    public static ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
+            .id(Identifier.of("tomsaddons", "tomsaddons"))
+            .serializer(config -> GsonConfigSerializerBuilder.create(config)
+                    .setPath(FabricLoader.getInstance().getConfigDir().resolve("tomsaddons.json5"))
+                    .appendGsonBuilder(GsonBuilder::setPrettyPrinting) // not needed, pretty print by default
+                    .setJson5(true)
+                    .build())
+            .build();
 
-    public static void load(){
-        // Check if the config file already exists and create one if it doesn't
-        if(!FILE.exists()){
-            save();
-        }
-        // Try to create a FileReader
-        try (FileReader reader = new FileReader(FILE)){
-            config = GSON.fromJson(reader, Config.class);
-            if (config == null){
-                config = new Config();
-            }
-        }
-        catch(IOException e){
-            TomsAddons.LOGGER.error("Failed to load config file!", e);
-        }
-
-    }
-    public static void save(){
-        try (FileWriter writer = new FileWriter(FILE)){
-            GSON.toJson(config, writer);
-        }
-        catch(IOException e){
-            TomsAddons.LOGGER.error("Failed to save config file!", e);
-        }
-
-    }
+    @SerialEntry
+    public static boolean starredMobESP = false;
+    @SerialEntry
+    public static double starredMobESPScale = 1;
+    @SerialEntry
+    public static Color starredMobESPColor = Color.red;
+    @SerialEntry
+    public static boolean shurikenMobESP = false;
+    @SerialEntry
+    public static double shurikenMobESPScale = 1;
+    @SerialEntry
+    public static Color shurikenMobESPColor = Color.cyan;
+    @SerialEntry
+    public static boolean immunityTimers = false;
+    @SerialEntry
+    public static boolean bonzoMask = true;
+    @SerialEntry
+    public static boolean spiritMask = true;
+    @SerialEntry
+    public static boolean phoenixPet = true;
+    @SerialEntry
+    public static int cataLVL = 50;
+    @SerialEntry
+    public static boolean instantRequeue = false;
+    @SerialEntry
+    public static boolean commandAliases = false;
+    @SerialEntry
+    public static boolean kuudraPrediction = false;
+    @SerialEntry
+    public static int kuudraPredictionX = 10;
+    @SerialEntry
+    public static int kuudraPredictionY = 0;
+    @SerialEntry
+    public static boolean forceKuudraPredictionHUD = false;
+    @SerialEntry
+    public static Color kuudraPreHUDColor = Color.CYAN;
+    @SerialEntry
+    public static boolean miningTimers = false;
+    @SerialEntry
+    public static int pickobulusLevel = 1;
+    @SerialEntry
+    public static boolean balLvl100 = false;
+    @SerialEntry
+    public static String drillEngine = "None";
+    @SerialEntry
+    public static Color miningTimersColor = Color.GREEN;
 }
