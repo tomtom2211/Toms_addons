@@ -15,7 +15,7 @@ public class Config {
             .id(Identifier.of("tomsaddons", "tomsaddons"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("tomsaddons.json5"))
-                    .appendGsonBuilder(GsonBuilder::setPrettyPrinting) // not needed, pretty print by default
+                    .appendGsonBuilder(GsonBuilder::setPrettyPrinting)
                     .setJson5(true)
                     .build())
             .build();
