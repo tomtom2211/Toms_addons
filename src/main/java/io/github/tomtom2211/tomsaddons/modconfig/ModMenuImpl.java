@@ -180,6 +180,16 @@ public class ModMenuImpl implements ModMenuApi {
                                                 .allowAlpha(true))
                                         .build())
                                 .build())
+                                .group(OptionGroup.createBuilder()
+                                    .name(Text.of("Rend Damage"))
+                                    .description(OptionDescription.of(Text.of("Sends damage >10m in chat while in kuudra.")))
+                                        .option(Option.<Boolean>createBuilder()
+                                                .name(Text.of("Toggle"))
+                                                .description(OptionDescription.of(Text.of("Toggles Rend Damage.")))
+                                                .binding(false, () -> Config.rendDamage, newVal -> Config.rendDamage = newVal)
+                                                .controller(TickBoxControllerBuilder::create)
+                                                .build())
+                                        .build())
                         .build())
 
                 // Mining

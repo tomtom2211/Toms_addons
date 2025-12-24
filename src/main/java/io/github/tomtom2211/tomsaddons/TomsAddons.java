@@ -41,6 +41,7 @@ public class TomsAddons implements ModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client ->{
             Jokes.init(jokeKey);
             KuudraPredict.init();
+            RendDamage.init();
         });
 
         ClientSendMessageEvents.COMMAND.register(CommandAliases::init);
@@ -63,6 +64,7 @@ public class TomsAddons implements ModInitializer {
             ImmunityTimers.unload();
             MiningTimers.unload();
             KuudraPredict.unload();
+            RendDamage.unload();
         });
 
         // For debugging purposes
