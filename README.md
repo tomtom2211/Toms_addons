@@ -5,24 +5,27 @@
 
 ## General category:
 ### Shuriken Mob ESP
-- Highlights mobs hit by an Extremely Real Shuriken outside of Dungeon and Kuudra instances
+- Highlights mobs hit by an Extremely Real Shuriken.
+- Customizable width, color of the outline.
   
 ## Dungeons category:
 ### Cata joke
 - Technically a chat macro, so use at your own risk!
-- Sends a joke into the chat on a keybind press (default: "J")
-- Currently includes 50 random jokes
+- Sends a joke into the chat on a keybind press (default: "J").
+- Currently includes some random jokes.
+- You can modify the jokes in jokes.json.
 
-### Starred mob ESP
-- Highlights dungeon starred mobs (if they are in players sight)
+### Starred Mob ESP
+- Highlights dungeon starred mobs (if they are in players sight).
+- Customizable width, color of the outline.
 
 ### Immunity Timers
-- Displays timers for immunity items (Bonzo's mask, Spirit mask and Phoenix pet)
+- Displays timers for immunity items (Bonzo's mask, Spirit mask, Phoenix pet).
   
 ### Instant requeue
-- Instantly requeues instances after each run.
+- Instantly requeues instances after each run (works for kuudra aswel).
 - Supports chat command !dt.
-- Checks if someone leaves the party and automatically stops requeue
+- Checks if someone leaves the party and automatically stops the requeue.
 - Plays Chime Noteblock sound whenever !dt is written in chat / on dungeon enter / on instance requeue.
 
 ### Command aliases
@@ -33,21 +36,24 @@
 ### Kuudra Prediction
 - Predicts Kuudra Tier V last-phase peek sides
 
+### Rend Damage
+- Sends a chat message showing damage dealt to Kuudra via Rend in T5 final phase.
+
 ## Mining category:
 ### Mining Timers
 - Displays timers for Mining Speed Boost and Pickobulus pickaxe abilities
 - Don't forget to set important settings for cooldown reduction in the settings
 
 ## Supported config mods
-- Cloth config
 - Mod menu
   
 ## Plans:
 - Dungeon reroll profit calculator
-- Make healer joke more customizeable 
 - Customizeable dungeon secret routes
 - Add move GUI config
+- Party commands
 
 ## Known Issues
+- Command aliases hide Unknown Command messages.
 - MiningTimers dont take into count Sky Mall / Mineshaft Mayhem
 - The path to the config file is hardcoded which is not the best solution
