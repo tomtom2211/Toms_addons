@@ -75,4 +75,10 @@ public class Config {
     public static String drillEngine = "None";
     @SerialEntry
     public static Color miningTimersColor = Color.GREEN;
+    @SerialEntry
+    public static boolean AnnounceScathas = false;
+    @SerialEntry
+    public static boolean WormCooldown = false;
+    @SerialEntry
+    public static Color WormCooldownColor = Color.cyan;
 }

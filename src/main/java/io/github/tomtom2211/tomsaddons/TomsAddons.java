@@ -33,6 +33,7 @@ public class TomsAddons implements ModInitializer {
         ImmunityTimers.immunityTimersHUD();
         MiningTimers.miningTimersHUD();
         KuudraPredict.kuudraPredictHUD();
+        Scatha.scathaHUD();
 
         // Keybinds
         KeyBinding jokeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny cata joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
@@ -58,6 +59,7 @@ public class TomsAddons implements ModInitializer {
         WorldRenderEvents.AFTER_ENTITIES.register(context -> {
             StarredMobESP.init(context);
             ShurikenMobESP.init(context);
+            Scatha.init();
         });
         // World change event
         ClientWorldEvents.AFTER_CLIENT_WORLD_CHANGE.register((client1, world) -> {
@@ -66,6 +68,7 @@ public class TomsAddons implements ModInitializer {
             KuudraPredict.unload();
             RendDamage.unload();
         });
+
 
         // For debugging purposes
         LOGGER.info("Tom's Addons have been initialized!");
