@@ -58,6 +58,22 @@ public class CommandAliases {
                 case "m7":
                     client.getNetworkHandler().sendChatCommand("joindungeon MASTER_CATACOMBS_FLOOR_SEVEN");
                     break;
+
+                case "t5":
+                    client.getNetworkHandler().sendChatCommand("joinkuudra KUUDRA_INFERNAL");
+                    break;
+                case "t4":
+                    client.getNetworkHandler().sendChatCommand("joinkuudra KUUDRA_FIERY");
+                    break;
+                case "t3":
+                    client.getNetworkHandler().sendChatCommand("joinkuudra KUUDRA_BURNING");
+                    break;
+                case "t2":
+                    client.getNetworkHandler().sendChatCommand("joinkuudra KUUDRA_HOT");
+                    break;
+                case "t1":
+                    client.getNetworkHandler().sendChatCommand("joinkuudra KUUDRA_NORMAL");
+                    break;
             }
         }
     }

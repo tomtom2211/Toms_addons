@@ -18,7 +18,7 @@ public class InstantRequeue {
                     1.2f
             );
         }
-        if(msg.getString().toLowerCase().contains("good job everyone.") && Config.instantRequeue && toggle && client.getNetworkHandler() != null && client.player != null){
+        if((msg.getString().toLowerCase().contains("good job everyone.") || msg.getString().toLowerCase().contains("kuudra down")) && Config.instantRequeue && toggle && client.getNetworkHandler() != null && client.player != null){
             client.getNetworkHandler().sendChatCommand("instancerequeue");
             client.player.playSound(
                     SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),

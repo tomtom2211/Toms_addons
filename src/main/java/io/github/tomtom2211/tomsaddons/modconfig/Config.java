@@ -27,6 +27,10 @@ public class Config {
     public static double shurikenMobESPScale = 1;
     @SerialEntry
     public static Color shurikenMobESPColor = Color.cyan;
+    @SerialEntry
+    public static boolean instantRequeue = false;
+    @SerialEntry
+    public static boolean commandAliases = false;
 
     // Dungeons
     @SerialEntry
@@ -45,10 +49,6 @@ public class Config {
     public static boolean phoenixPet = true;
     @SerialEntry
     public static int cataLVL = 50;
-    @SerialEntry
-    public static boolean instantRequeue = false;
-    @SerialEntry
-    public static boolean commandAliases = false;
 
     // Kuudra
     @SerialEntry

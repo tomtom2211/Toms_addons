@@ -7,11 +7,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RendDamage {
 
     private static float lastKuudraHp = 24999f;
-
+    public static final MinecraftClient client = MinecraftClient.getInstance();
+    public static List<Long> rendDamageArray = new ArrayList<>();
     public static void init() {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null || client.world == null || !Config.rendDamage) return;
@@ -20,11 +23,12 @@ public class RendDamage {
                 float currentHp = magmaCube.getHealth();
                 if (currentHp <= 25000) {
                     float damage = lastKuudraHp - currentHp;
-                    if (damage > 1500) {
+                    if (damage > 1666) {
                         long scaledDamage = (long) (damage * 10000);
+                        rendDamageArray.add(scaledDamage);
                         String color = getDamageColor((int) damage);
                         String formattedDamage = Formatting.shortFormat(scaledDamage);
-                        client.player.sendMessage(Text.literal("§d[REND] §fSomeone pulled for " + color + formattedDamage + " §fdamage."), false);
+                        client.player.sendMessage(Text.literal("§d[REND] §fSomeone pulled for " + color + formattedDamage + " §fdamage."), true);
                         client.player.playSound(
                                 SoundEvents.ENTITY_ARROW_HIT_PLAYER,
                                 1.0f,
@@ -50,8 +54,19 @@ public class RendDamage {
         }
     }
 
+    public static void sendRendDamageMap(Text msg){
+        if(!rendDamageArray.isEmpty() && client.player != null && msg.getString().toLowerCase().contains("kuudra down")) {
+            for(Long damage : rendDamageArray){
+                client.player.sendMessage(Text.literal("§d[Rend]§f" + damage),false);
+            }
+        }
+    }
+
     public static void unload() {
         lastKuudraHp = 24999f;
+        if(!rendDamageArray.isEmpty()) {
+            rendDamageArray.clear();
+        }
     }
 
 }
