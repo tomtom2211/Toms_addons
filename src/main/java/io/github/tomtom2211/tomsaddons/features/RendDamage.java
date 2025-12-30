@@ -24,16 +24,16 @@ public class RendDamage {
                 if (currentHp <= 25000) {
                     float damage = lastKuudraHp - currentHp;
                     if (damage > 1666) {
-                        long scaledDamage = (long) (damage * 10000);
-                        rendDamageArray.add(scaledDamage);
+                        long scaledDamage = (long) (damage * 9600);
                         String color = getDamageColor((int) damage);
                         String formattedDamage = Formatting.shortFormat(scaledDamage);
-                        client.player.sendMessage(Text.literal("§d[REND] §fSomeone pulled for " + color + formattedDamage + " §fdamage."), true);
+                        client.player.sendMessage(Text.literal("§d[REND] §fSomeone pulled for " + color + formattedDamage + " §fdamage."), false);
                         client.player.playSound(
                                 SoundEvents.ENTITY_ARROW_HIT_PLAYER,
                                 1.0f,
                                 1.2f
                         );
+                        rendDamageArray.add(scaledDamage);
                     }
                 }
                 lastKuudraHp = currentHp;
@@ -57,7 +57,7 @@ public class RendDamage {
     public static void sendRendDamageMap(Text msg){
         if(!rendDamageArray.isEmpty() && client.player != null && msg.getString().toLowerCase().contains("kuudra down")) {
             for(Long damage : rendDamageArray){
-                client.player.sendMessage(Text.literal("§d[Rend]§f" + damage),false);
+                client.player.sendMessage(Text.literal("§d[Rend]§f" + Formatting.shortFormat(damage)),false);
             }
         }
     }

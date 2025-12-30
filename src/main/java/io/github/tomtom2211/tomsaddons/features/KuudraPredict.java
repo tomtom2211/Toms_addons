@@ -9,7 +9,7 @@ import net.minecraft.entity.mob.MagmaCubeEntity;
 import net.minecraft.util.Identifier;
 
 public class KuudraPredict {
-    public static String side;
+    public static String side ="" ;
     public static final MinecraftClient client = MinecraftClient.getInstance();
 
     public static void kuudraPredictHUD(){
@@ -18,7 +18,7 @@ public class KuudraPredict {
                 Identifier.of("tomsaddons", "after_hotbar_10"),
                 (context, tickCounter) -> {
                     MinecraftClient client = MinecraftClient.getInstance();
-                    if (side != null && Config.kuudraPrediction) {
+                    if (!side.isEmpty() && Config.kuudraPrediction) {
                         context.drawText(
                                 client.textRenderer,
                                 side,
@@ -32,33 +32,33 @@ public class KuudraPredict {
         );
     }
     public static void init(){
-        if(client.world != null && client.player != null && Config.kuudraPrediction && !Config.forceKuudraPredictionHUD  && client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
+        if (Config.forceKuudraPredictionHUD){
+            side = "FORCED";
+            return;
+        }
+        else if(client.world != null && client.player != null && Config.kuudraPrediction && client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
             for (Entity entity : client.world.getEntities()) {
-                if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getPos().y<35 && magmaCube.getSize() > 20){
-                    if(magmaCube.getPos().x < -128){
+                if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getPos().y<35 && magmaCube.getWidth() > 14){
+                    if(magmaCube.getBlockPos().getX() < -128 && !side.equals("RIGHT")){
                         side = "RIGHT";
                     }
-                    else if(magmaCube.getPos().x > -72){
+                    else if(magmaCube.getBlockPos().getX() > -72 && !side.equals("LEFT")){
                         side = "LEFT";
                     }
-                    else if(magmaCube.getPos().z > -84){
+                    else if(magmaCube.getBlockPos().getZ() > -84 && !side.equals("FRONT")){
                         side = "FRONT";
                     }
-                    else if(magmaCube.getPos().z < -132){
+                    else if(magmaCube.getBlockPos().getZ() < -132 && !side.equals("BACK")){
                         side = "BACK";
                     }
+                    return;
                 }
             }
         }
-        else if (Config.forceKuudraPredictionHUD){
-                side = "FORCED";
-        }
-        else{
-            side = null;
-        }
+            side = "";
     }
 
     public static void unload(){
-        side = null;
+        side = "";
     }
 }
