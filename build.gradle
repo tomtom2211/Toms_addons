@@ -21,6 +21,7 @@ repositories {
         name 'Xander Maven'
         url 'https://maven.isxander.dev/releases'
     }
+    maven { url 'https://repo.hypixel.net/repository/Hypixel/' }
     maven { url "https://maven.terraformersmc.com/releases/" }
     // Add repositories to retrieve artifacts from in here.
     // You should only use this when depending on other mods because
@@ -39,6 +40,7 @@ dependencies {
     // For configs
     modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
     modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
+    modImplementation 'net.hypixel:mod-api:1.0.1'
 
 }
 

@@ -3,6 +3,7 @@ package io.github.tomtom2211.tomsaddons;
 import io.github.tomtom2211.tomsaddons.features.*;
 import io.github.tomtom2211.tomsaddons.modconfig.Config;
 import io.github.tomtom2211.tomsaddons.modconfig.ModMenuImpl;
+import io.github.tomtom2211.tomsaddons.utils.LocationUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
@@ -29,6 +30,8 @@ public class TomsAddons implements ModInitializer {
 
     @Override
     public void onInitialize() {
+
+        LocationUtils.init();
 
         // /ta command registration
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(ClientCommandManager.literal("ta")

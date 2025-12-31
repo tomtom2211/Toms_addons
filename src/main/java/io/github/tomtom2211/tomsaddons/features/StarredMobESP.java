@@ -1,6 +1,7 @@
 package io.github.tomtom2211.tomsaddons.features;
 
 import io.github.tomtom2211.tomsaddons.modconfig.Config;
+import io.github.tomtom2211.tomsaddons.utils.LocationUtils;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
@@ -13,18 +14,17 @@ import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
-
 public class StarredMobESP {
 
     public static void init(WorldRenderContext context){
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null || client.world == null || !Config.starredMobESP) return;
+        if (client.world == null || !Config.starredMobESP ||  !LocationUtils.inDungeon) return;
 
         MatrixStack matrices = context.matrixStack(); // Gives a current game view state (yaw/distance etc.)
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something
         Vec3d cameraPos = context.camera().getPos(); // Camera position
         for (Entity entity : client.world.getEntities()) {
-            if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().replaceAll("✯","").length()+1 == armorStand.getName().getString().length() && client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
+            if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().replaceAll("✯","").length()+1 == armorStand.getName().getString().length()) {
                 int mobId = armorStand.getId();
                 Entity mob = client.world.getEntityById(mobId);
                 if (mob != null && consumers != null && matrices != null) {

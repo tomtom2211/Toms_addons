@@ -1,6 +1,7 @@
 package io.github.tomtom2211.tomsaddons.features;
 
 import io.github.tomtom2211.tomsaddons.modconfig.Config;
+import io.github.tomtom2211.tomsaddons.utils.LocationUtils;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
@@ -18,7 +19,7 @@ public class ShurikenMobESP{
     public static void init(WorldRenderContext context) {
 
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player == null || client.world == null || !Config.shurikenMobESP) return;
+        if (client.player == null || client.world == null || !Config.shurikenMobESP || LocationUtils.inDungeon) return;
 
         MatrixStack matrices = context.matrixStack(); // Gives a current game view state (yaw/distance etc.)
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something
