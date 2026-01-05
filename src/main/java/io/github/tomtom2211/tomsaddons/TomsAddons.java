@@ -73,6 +73,7 @@ public class TomsAddons implements ModInitializer {
             MiningTimers.init(message);
             RendDamage.sendRendDamageMap(message);
             InstantRequeue.init(message);
+            KuudraPredict.checkPhase(message);
         });
         ClientReceiveMessageEvents.ALLOW_GAME.register((message, overlay) -> CommandAliases.supressUnknownCommand(message));
 

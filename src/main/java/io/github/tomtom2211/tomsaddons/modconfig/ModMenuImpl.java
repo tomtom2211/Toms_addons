@@ -188,6 +188,12 @@ public class ModMenuImpl implements ModMenuApi {
                                                 .binding(false, () -> Config.rendDamage, newVal -> Config.rendDamage = newVal)
                                                 .controller(TickBoxControllerBuilder::create)
                                                 .build())
+                                        .option(Option.<Boolean>createBuilder()
+                                                .name(Text.of("Rend list"))
+                                                .description(OptionDescription.of(Text.of("Sends a list of the rend procs at the end of the run (will eventually display nicknames aswel)")))
+                                                .binding(false, () -> Config.rendDamageList, newVal -> Config.rendDamageList = newVal)
+                                                .controller(TickBoxControllerBuilder::create)
+                                                .build())
                                         .build())
                         .build())
 

@@ -1,16 +1,19 @@
 package io.github.tomtom2211.tomsaddons.features;
 
 import io.github.tomtom2211.tomsaddons.modconfig.Config;
+import io.github.tomtom2211.tomsaddons.utils.LocationUtils;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MagmaCubeEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class KuudraPredict {
     public static String side ="" ;
     public static final MinecraftClient client = MinecraftClient.getInstance();
+    public static boolean phase4 = false;
 
     public static void kuudraPredictHUD(){
         HudElementRegistry.attachElementAfter(
@@ -36,9 +39,9 @@ public class KuudraPredict {
             side = "FORCED";
             return;
         }
-        else if(client.world != null && client.player != null && Config.kuudraPrediction && client.world.getBiome(client.player.getBlockPos()).getIdAsString().toLowerCase().contains("minecraft:badlands")) {
+        else if(phase4 && client.world != null && client.player != null && Config.kuudraPrediction && LocationUtils.inKuudra) {
             for (Entity entity : client.world.getEntities()) {
-                if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getPos().y<35 && magmaCube.getWidth() > 14){
+                if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getWidth() > 14){
                     if(magmaCube.getBlockPos().getX() < -128 && !side.equals("RIGHT")){
                         side = "RIGHT";
                     }
@@ -58,7 +61,14 @@ public class KuudraPredict {
             side = "";
     }
 
+    public static void checkPhase(Text msg){
+        if(msg.getString().toLowerCase().contains("i knew you could do it!")){
+            phase4 = true;
+        }
+    }
+
     public static void unload(){
+        phase4 = false;
         side = "";
     }
 }

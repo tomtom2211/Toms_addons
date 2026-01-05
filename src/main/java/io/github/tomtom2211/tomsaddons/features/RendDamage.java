@@ -55,7 +55,7 @@ public class RendDamage {
     }
 
     public static void sendRendDamageMap(Text msg){
-        if(!rendDamageArray.isEmpty() && client.player != null && msg.getString().toLowerCase().contains("kuudra down")) {
+        if(Config.rendDamageList && !rendDamageArray.isEmpty() && client.player != null && msg.getString().toLowerCase().contains("kuudra down")) {
             for(Long damage : rendDamageArray){
                 client.player.sendMessage(Text.literal("§d[Rend]§f" + Formatting.shortFormat(damage)),false);
             }

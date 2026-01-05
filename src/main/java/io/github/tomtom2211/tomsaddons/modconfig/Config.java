@@ -63,6 +63,8 @@ public class Config {
     public static Color kuudraPreHUDColor = Color.CYAN;
     @SerialEntry
     public static boolean rendDamage = false;
+    @SerialEntry
+    public static boolean rendDamageList = false;
 
     // Mining
     @SerialEntry
