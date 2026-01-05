@@ -12,19 +12,23 @@ public class InstantRequeue {
 
         if(msg.getString().toLowerCase().contains("to re-queue") && Config.instantRequeue && toggle && client.getNetworkHandler() != null && client.player != null){
             client.getNetworkHandler().sendChatCommand("instancerequeue");
-            client.player.playSound(
-                    SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
-                    0.5f,
-                    1.2f
-            );
+            if(Config.instantRequeueSound) {
+                client.player.playSound(
+                        SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
+                        0.5f,
+                        1.2f
+                );
+            }
         }
         if((msg.getString().toLowerCase().contains("good job everyone.") || msg.getString().toLowerCase().contains("kuudra down")) && Config.instantRequeue && toggle && client.getNetworkHandler() != null && client.player != null){
             client.getNetworkHandler().sendChatCommand("instancerequeue");
-            client.player.playSound(
-                    SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
-                    0.5f,
-                    1.2f
-            );
+            if(Config.instantRequeueSound) {
+                client.player.playSound(
+                        SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
+                        0.5f,
+                        1.2f
+                );
+            }
         }
 
         if(msg.getString().toLowerCase().contains("entered") && client.player != null && Config.instantRequeue){
@@ -33,19 +37,23 @@ public class InstantRequeue {
 
         if(msg.getString().toLowerCase().contains("!dt") && client.player != null && Config.instantRequeue){
             toggle = false;
-            client.player.playSound(
-                    SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
-                    0.5f,
-                    1.2f
-            );
+            if(Config.instantRequeueSound) {
+                client.player.playSound(
+                        SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
+                        0.5f,
+                        1.2f
+                );
+            }
         }
         if((msg.getString().toLowerCase().contains("has left the party.") || msg.getString().toLowerCase().contains("has been removed from the party.")) && client.player != null && Config.instantRequeue){
             toggle = false;
-            client.player.playSound(
-                    SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
-                    0.5f,
-                    1.2f
-            );
+            if(Config.instantRequeueSound) {
+                client.player.playSound(
+                        SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(),
+                        0.5f,
+                        1.2f
+                );
+            }
         }
 
 

@@ -30,6 +30,8 @@ public class Config {
     @SerialEntry
     public static boolean instantRequeue = false;
     @SerialEntry
+    public static boolean instantRequeueSound = false;
+    @SerialEntry
     public static boolean commandAliases = false;
 
     // Dungeons
