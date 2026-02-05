@@ -13,7 +13,7 @@
 - Technically a chat macro, so use at your own risk!
 - Sends a joke into the chat on a keybind press (default: "J").
 - Currently includes some random jokes.
-- You can modify the jokes in jokes.json.
+- You can modify the jokes list in jokes.json.
 
 ### Starred Mob ESP
 - Highlights dungeon starred mobs (if they are in players sight).
@@ -38,14 +38,15 @@
 
 ### Rend Damage
 - Sends a chat message showing damage dealt to Kuudra via Rend in T5 final phase.
+- Optionally sends rend proc recap after each run.
 
 ## Mining category:
 ### Mining Timers
 - Displays timers for Mining Speed Boost and Pickobulus pickaxe abilities
 - Don't forget to set important settings for cooldown reduction in the settings
-
-## Supported config mods
-- Mod menu
+### Scatha features
+- Announces scatha/worm spawns
+- Display worm spawning cooldown
   
 ## Plans:
 - Dungeon reroll profit calculator
@@ -56,4 +57,3 @@
 ## Known Issues
 - Command aliases hide Unknown Command messages.
 - MiningTimers dont take into count Sky Mall / Mineshaft Mayhem
-- The path to the config file is hardcoded which is not the best solution
