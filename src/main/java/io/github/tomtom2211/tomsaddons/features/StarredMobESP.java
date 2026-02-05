@@ -1,8 +1,7 @@
 package io.github.tomtom2211.tomsaddons.features;
 
 import io.github.tomtom2211.tomsaddons.modconfig.Config;
-import io.github.tomtom2211.tomsaddons.utils.LocationUtils;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -18,26 +17,45 @@ public class StarredMobESP {
 
     public static void init(WorldRenderContext context){
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.world == null || !Config.starredMobESP ||  !LocationUtils.inDungeon) return;
+        if (client.world == null || !Config.starredMobESP || client.getCameraEntity() == null) return;
 
-        MatrixStack matrices = context.matrixStack(); // Gives a current game view state (yaw/distance etc.)
+        MatrixStack matrices = context.matrices(); // Gives a current game view state (yaw/distance etc.)
         VertexConsumerProvider consumers = context.consumers(); // Create a consumer to let minecraft know you want to render something
-        Vec3d cameraPos = context.camera().getPos(); // Camera position
+        Vec3d cameraPos = client.getCameraEntity().getEyePos(); // Camera position
         for (Entity entity : client.world.getEntities()) {
             if (entity instanceof ArmorStandEntity armorStand && armorStand.getName().getString().replaceAll("✯","").length()+1 == armorStand.getName().getString().length()) {
                 int mobId = armorStand.getId();
                 Entity mob = client.world.getEntityById(mobId);
                 if (mob != null && consumers != null && matrices != null) {
+                    matrices.push();
+
+                    matrices.translate(
+                            -cameraPos.x,
+                            -cameraPos.y-1,
+                            -cameraPos.z
+                    );
+
+
                     Box box = mob.getBoundingBox()
-                            .expand(Config.starredMobESPScale*0.5, 1, Config.starredMobESPScale*0.5)
-                            .offset(-cameraPos.x, -cameraPos.y - 1, -cameraPos.z); // Absolute => Relative coordinates
-                    VertexConsumer buffer = consumers.getBuffer(RenderLayer.getLines());// Something, you can actually write into
+                            .expand(
+                                    Config.starredMobESPScale * 0.5,
+                                    1,
+                                    Config.starredMobESPScale * 0.5
+                            );
+
+                    VertexConsumer buffer = consumers.getBuffer(RenderLayer.getLines());
+
                     VertexRendering.drawBox(
-                            matrices,
+                            matrices.peek(),
                             buffer,
                             box,
-                            Config.starredMobESPColor.getRed()/255.0f, Config.starredMobESPColor.getGreen()/255.0f, Config.starredMobESPColor.getBlue()/255.0f, Config.starredMobESPColor.getAlpha()/255.0f // RGBA = red
+                            Config.starredMobESPColor.getRed() / 255f,
+                            Config.starredMobESPColor.getGreen() / 255f,
+                            Config.starredMobESPColor.getBlue() / 255f,
+                            Config.starredMobESPColor.getAlpha() / 255f
                     );
+
+                    matrices.pop();
                 }
             }
         }

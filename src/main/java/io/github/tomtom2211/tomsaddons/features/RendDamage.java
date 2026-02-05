@@ -19,7 +19,7 @@ public class RendDamage {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null || client.world == null || !Config.rendDamage) return;
         for (Entity entity : client.world.getEntities()) {
-            if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getPos().y < 35 && magmaCube.getSize() > 20) {
+            if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getBlockPos().getY() < 35 && magmaCube.getSize() > 20) {
                 float currentHp = magmaCube.getHealth();
                 if (currentHp <= 25000) {
                     float damage = lastKuudraHp - currentHp;

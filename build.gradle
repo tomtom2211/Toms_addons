@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.13.6'
+    id 'fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -41,7 +41,6 @@ dependencies {
     modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
     modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
     modImplementation 'net.hypixel:mod-api:1.0.1'
-
 }
 
 processResources {

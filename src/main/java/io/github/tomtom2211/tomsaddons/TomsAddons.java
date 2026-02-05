@@ -14,11 +14,12 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientWorldEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,8 +57,12 @@ public class TomsAddons implements ModInitializer {
         Scatha.scathaHUD();
 
         // Keybinds
-        KeyBinding jokeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("Funny cata joke", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_J, "Tom's Addons"));
-
+                KeyBinding jokeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.tomsaddons.funny_joke", // Translation key
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_J,
+                        KeyBinding.Category.create(Identifier.of("category.tomsaddons")) // Category translation key
+        ));
         //  End client tick event
         ClientTickEvents.END_CLIENT_TICK.register(client ->{
             Jokes.init(jokeKey);
