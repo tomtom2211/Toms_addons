@@ -41,20 +41,19 @@ public class KuudraPredict {
         }
         else if(phase4 && client.world != null && client.player != null && Config.kuudraPrediction && LocationUtils.inKuudra) {
             for (Entity entity : client.world.getEntities()) {
-                if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getWidth() > 14){
-                    if(magmaCube.getBlockPos().getX() < -128 && !side.equals("RIGHT")){
-                        side = "RIGHT";
+                if(!Config.kuudraCheckY || client.player.getBlockPos().getY() < 25) {
+                    if (entity instanceof MagmaCubeEntity magmaCube && magmaCube.getWidth() > 14) {
+                        if (magmaCube.getBlockPos().getX() < -128 && !side.equals("RIGHT")) {
+                            side = "RIGHT";
+                        } else if (magmaCube.getBlockPos().getX() > -72 && !side.equals("LEFT")) {
+                            side = "LEFT";
+                        } else if (magmaCube.getBlockPos().getZ() > -84 && !side.equals("FRONT")) {
+                            side = "FRONT";
+                        } else if (magmaCube.getBlockPos().getZ() < -132 && !side.equals("BACK")) {
+                            side = "BACK";
+                        }
+                        return;
                     }
-                    else if(magmaCube.getBlockPos().getX() > -72 && !side.equals("LEFT")){
-                        side = "LEFT";
-                    }
-                    else if(magmaCube.getBlockPos().getZ() > -84 && !side.equals("FRONT")){
-                        side = "FRONT";
-                    }
-                    else if(magmaCube.getBlockPos().getZ() < -132 && !side.equals("BACK")){
-                        side = "BACK";
-                    }
-                    return;
                 }
             }
         }

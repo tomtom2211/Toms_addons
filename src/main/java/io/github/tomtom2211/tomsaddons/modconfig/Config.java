@@ -64,6 +64,8 @@ public class Config {
     @SerialEntry
     public static Color kuudraPreHUDColor = Color.CYAN;
     @SerialEntry
+    public static boolean kuudraCheckY = false;
+    @SerialEntry
     public static boolean rendDamage = false;
     @SerialEntry
     public static boolean rendDamageList = false;

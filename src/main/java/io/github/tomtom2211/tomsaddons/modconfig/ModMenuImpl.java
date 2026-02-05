@@ -184,6 +184,13 @@ public class ModMenuImpl implements ModMenuApi {
                                         .controller(opt -> ColorControllerBuilder.create(opt)
                                                 .allowAlpha(true))
                                         .build())
+
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Text.of("Check players Y"))
+                                        .description(OptionDescription.of(Text.of("Checks Y of a player to make the prediction more accurate but slower.")))
+                                        .binding(false, () -> Config.kuudraCheckY, newVal -> Config.kuudraCheckY = newVal)
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
                                 .build())
                                 .group(OptionGroup.createBuilder()
                                     .name(Text.of("Rend Damage"))
